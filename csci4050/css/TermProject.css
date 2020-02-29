@@ -1,3 +1,23 @@
 .carousel-inner > .item {
   height:400px;
 }
+
+form {
+  text-align: center;
+}
+
+form p {
+  font-size: xx-large;
+}
+
+form div {
+  margin: 0px 0px 30px 0px;
+}
+
+.required {
+  color: red;
+}
+
+.regComp {
+  text-align: center;
+}

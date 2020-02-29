@@ -25,24 +25,22 @@
 
     <form id="login" class="form-inline">
         <div>
-            <p>LOGIN PAGE</p>
+            <p>SEARCH PAGE</p>
         </div>
         <div class="form-group">
-            <label for="Username">Username:</label>
-            <input id="Username" class="form-control">
+            <label for="searchType">Choose a Search Type:</label>
+            <select id="searchType">
+                <option value="title">Title</option>
+                <option value="Author">Author</option>
+                <option value="Genre">Genre</option>
+            </select>
         </div>
         <div class="form-group">
-            <label for="Password">Password:</label>
+            <label for="Password">Search:</label>
             <input type="password" id="Password" class="form-control">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-default">Login</button>
-        </div>
-        <div>
-            <a href="forgot.html">Forgot password?</a>
-        </div>
-        <div>
-            <a href="registration.html">Create Account</a>
+            <button type="submit" class="btn btn-default">GO</button>
         </div>
     </form>
 </body>
