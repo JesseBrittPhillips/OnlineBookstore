@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/TermProject.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="../javascript/test.js"></script>
+    <title></title>
+    <script></script>
+</head>
+<body>
+    <nav class="nav navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="home.html" class="navbar-brand">BOOKSTORE TITLE</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="search.html"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+                <li><a href="mycart.html">MY CART</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form id="createAccount" action="registrationComplete.html" class="form-horizontal">
+            <div>
+                <p>EDIT PROFILE</p>
+            </div>
+            <div class="form-group">
+                <p>Personal Information</p>
+                <label class="contol-label col-sm-2" for="password">Name: <span class="required">*</span></label>
+                <div class="col-sm-10">
+                    <input class="form-control" required>
+                </div>
+                <label class="contol-label col-sm-2" for="password">Email: <span class="required">*</span></label>
+                <div class="col-sm-10">
+                        <input class="form-control" required>
+                </div>
+                <label class="contol-label col-sm-2" for="password">Gender: <span class="required">*</span></label>
+                <div class="col-sm-3">
+                    <label class="radio-inline">
+                        <input type="radio" name="optradio" checked>Male
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optradio">Female
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optradio">Other
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Account Information</p>
+                <label class="contol-label col-sm-2" for="password">Username: <span class="required">*</span></label>
+                <div class="col-sm-10">
+                    <input class="form-control" required="true">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Password: <span class="required">*</span></label>
+                <div class="col-sm-10">
+                    <input type="password" id="password" class="form-control" required="true">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Retype Password: <span class="required">*</span></label>
+                <div class="col-sm-10">
+                    <input type="password" id="password" class="form-control" required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Address</p>
+                <label class="contol-label col-sm-2" for="password">Address Line 1: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Address Line 2: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">City: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">State: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Zip Code: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Card Information</p>
+                <label class="contol-label col-sm-2" for="password">Name on Card: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Card Number: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Expiration Date: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Billing Address: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Address Line 2: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">City: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">State: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+                <label class="contol-label col-sm-2" for="password">Zip Code: </label>
+                <div class="col-sm-10">
+                    <input class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Create Account" class="btn btn-default" onclick="sendEmail()">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
