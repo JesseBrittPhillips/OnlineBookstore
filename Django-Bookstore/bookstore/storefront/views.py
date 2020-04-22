@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Customers
-from .forms import CustomerRegForm, CustomerLoginForm, CustomerEdit
+from .forms import CustomerRegForm, CustomerLoginForm, CustomerEdit, CheckEmailForm
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.sites.shortcuts import get_current_site
@@ -31,7 +31,54 @@ def activate(request, uidb64, token):
     else:
         user.is_active = True
         user.save()
+        return redirect('/activated')
+
+def password_reset_confirm(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64)
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        # return redirect('home')
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        user.is_active = True
+        user.save()
         return redirect('/reset/done')
+
+def password_reset(request):
+    x = ""
+    form = CheckEmailForm(request.POST or None)
+    if form.is_valid():
+        user = form.save(commit=False)
+        emailAuth = authenticate(username=user.username)
+        if emailAuth is not None:
+            current_site = get_current_site(request)
+            mail_subject = 'Reset your password.'
+            message = render_to_string('reset_password_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                mail_subject, message, to=[to_email]
+            )
+            email.send()
+            return redirect("/password_reset/done")
+        else:
+            x = "please enter the correct email"
+
+    context = {
+        'form': form,
+        'x': x
+    }
+    return render(request, "storefront/html/reset-password.html", context)
 
 def register(request):
     x = ""
@@ -75,9 +122,21 @@ def customer_reg_view(request):
     }
     return render(request, "storefront/html/registration.html", context)
 
+def activated(request):
+    context = {}
+    return render(request, "storefront/html/verificationComplete.html", context)
+
 def customer_reg_complete_view(request):
     context = {}
     return render(request, "storefront/html/registrationComplete.html", context)
+
+def password_reset_done(request):
+    context = {}
+    return render(request, "storefront/html/reset-done.html", context)
+
+def password_reset_complete(request):
+    context = {}
+    return render(request, "storefront/html/reset-done.html", context)
 
 def customer_login_view(request):
     x = 0

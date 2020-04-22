@@ -7,6 +7,12 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, User
 User = get_user_model()
 
 
+class CheckEmailForm(forms.ModelForm):
+    class Meta:
+        model = Customers
+        fields = ['username']
+
+
 class CustomerRegForm(UserCreationForm):
     email = forms.EmailField(label='Email address', max_length=75)
     phone = forms.CharField(label='Phone Number', max_length=75)
@@ -51,7 +57,6 @@ class CustomerRegForm(UserCreationForm):
         user.state = self.cleaned_data['state']
         user.zip_code = self.cleaned_data['zip_code']
         user.city = self.cleaned_data['city']
-        user.email = self.cleaned_data['card_type']
         user.card_number = self.cleaned_data['card_number']
         user.card_type = self.cleaned_data['card_type']
         user.expirationdate = self.cleaned_data['expirationdate']

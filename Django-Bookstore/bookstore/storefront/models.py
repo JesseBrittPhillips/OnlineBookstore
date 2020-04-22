@@ -102,7 +102,7 @@ class Customers(AbstractBaseUser, ExtraManager):
     city = models.CharField(db_column='city', max_length=45, blank=True, null=True)  # Field name made lowercase.
     state = models.CharField(db_column='State', max_length=45, blank=True, null=True)  # Field name made lowercase.
     zip_code = models.CharField(db_column='zipcode', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    promotions = models.IntegerField(blank=True, null=True)
+    promotions = models.IntegerField(default=False, blank=True, null=True)
     cart_id = models.ForeignKey('ShoppingCart', models.DO_NOTHING, db_column='cart_id', blank=True, null=True)  # Field name made lowercase.
     card_type = models.CharField(db_column='card_type', max_length=45, blank=True, null=True)  # Field name made lowercase.
     card_number = EncryptedCharField(max_length=100)  # Field name made lowercase.
@@ -132,7 +132,6 @@ class Customers(AbstractBaseUser, ExtraManager):
 
     def has_module_perms(self, app_label):
         return self.is_staff
-
 
     class Meta:
         managed = False

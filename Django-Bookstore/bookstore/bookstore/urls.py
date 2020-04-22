@@ -17,13 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import (
-    PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-)
 
 from storefront.views import (
     customer_reg_view, customer_reg_complete_view, customer_login_view, forgot_view,
-    home_view, loggedin_view, register, activate, view_profile, edit_profile, changepassword
+    home_view, loggedin_view, register, activate, view_profile, edit_profile, changepassword,
+    password_reset, password_reset_done, password_reset_confirm, password_reset_complete, activated
 )
 
 
@@ -34,6 +32,7 @@ urlpatterns = [
     path('register/', register),
     path('register/registrationComplete', customer_reg_complete_view),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
+    path('activated/', activated),
     path('profile/', view_profile, name='view_profile'),
     path('profile/edit', edit_profile, name='edit_profile'),
     path('profile/changepassword', changepassword, name='changepassword'),
@@ -41,16 +40,10 @@ urlpatterns = [
     path('home/', home_view),
     path('admin/', admin.site.urls),
     path('loggedin/', loggedin_view),
-    # path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
-    # path('password_reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('reset/done/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('', home_view),
-
-    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-
+    path('password_reset/', password_reset, name='password_reset'),
+    path('password_reset/done/', password_reset_done, name='password_reset_done'),
+    path('reset/<slug:uidb64>/<slug:token>/', password_reset_confirm, name='password_reset_confirm'),
+    path('reset/done/', password_reset_complete, name='password_reset_complete'),
 ]
 
