@@ -3,6 +3,7 @@ from django import forms
 from .models import Customers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, UserChangeForm
+from django.core.validators import MaxValueValidator
 
 User = get_user_model()
 
@@ -10,7 +11,7 @@ User = get_user_model()
 class CheckEmailForm(forms.ModelForm):
     class Meta:
         model = Customers
-        fields = ['username']
+        fields = ['email']
 
 
 class CustomerRegForm(UserCreationForm):
@@ -19,10 +20,10 @@ class CustomerRegForm(UserCreationForm):
     address = forms.CharField(label='Address', max_length=75, required=False)
     state = forms.CharField(label='State', max_length=75, required=False)
     city = forms.CharField(label='City', max_length=75, required=False)
-    zip_code = forms.CharField(label='Zip Code', max_length=75, required=False)
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)])
     card_type = forms.CharField(label='Card Type', max_length=75, required=False)
     card_number = forms.CharField(label='Card Number', max_length=75, required=False)
-    expirationdate = forms.DateField(label='Expiration Date', required=False)
+    expiration_date = forms.DateField(label='Expiration Date', required=False)
     promotions = forms.BooleanField(label='promotions', required=False)
 
     class Meta:
@@ -39,7 +40,7 @@ class CustomerRegForm(UserCreationForm):
             'zip_code',
             'card_type',
             'card_number',
-            'expirationdate',
+            'expiration_date',
             'password1',
             'password2',
             'promotions'
@@ -59,7 +60,7 @@ class CustomerRegForm(UserCreationForm):
         user.city = self.cleaned_data['city']
         user.card_number = self.cleaned_data['card_number']
         user.card_type = self.cleaned_data['card_type']
-        user.expirationdate = self.cleaned_data['expirationdate']
+        user.expiration_date = self.cleaned_data['expiration_date']
 
         if commit:
             user.save()
@@ -73,11 +74,11 @@ class CustomerEdit(UserChangeForm):
     address = forms.CharField(label='Address', max_length=75, required=False)
     state = forms.CharField(label='State', max_length=75, required=False)
     city = forms.CharField(label='City', max_length=75, required=False)
-    zip_code = forms.CharField(label='Zip Code', max_length=75, required=False)
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)])
     card_type = forms.CharField(label='Card Type', max_length=75, required=False)
     card_number = forms.CharField(label='Card Number', max_length=75, required=False)
     promotions = forms.BooleanField(label='promotions', required=False)
-    expirationdate = forms.DateField(label='Expiration Date', required=False)
+    expiration_date = forms.DateField(label='Expiration Date', required=False)
 
     class Meta:
         model = User
@@ -91,33 +92,13 @@ class CustomerEdit(UserChangeForm):
             'zip_code',
             'card_type',
             'card_number',
-            'expirationdate',
+            'expiration_date',
             'promotions'
         )
         exclude = (
             'email',
             'username'
         )
-
-    # def save(self, commit=True):
-    #     user = super(CustomerRegForm, self).save(commit=False)
-    #     user.first_name = self.cleaned_data['first_name']
-    #     user.last_name = self.cleaned_data['last_name']
-    #     user.email = self.cleaned_data['email']
-    #     user.phone = self.cleaned_data['phone']
-    #     user.address = self.cleaned_data['address']
-    #     user.state = self.cleaned_data['state']
-    #     user.zip_code = self.cleaned_data['zip_code']
-    #     user.city = self.cleaned_data['city']
-    #     user.email = self.cleaned_data['card_type']
-    #     user.card_type = self.cleaned_data['card_type']
-    #     user.card_number = self.cleaned_data['card_number']
-    #     user.expirationdate = self.cleaned_data['expirationdate']
-    #
-    #     if commit:
-    #         user.save()
-    #
-    #     return user
 
 
 class CustomerLoginForm(forms.ModelForm):
@@ -128,3 +109,33 @@ class CustomerLoginForm(forms.ModelForm):
         model = Customers
         fields = ['email', 'password']
         widgets = {'password': forms.PasswordInput(), }
+
+
+class Checkout(UserChangeForm):
+    address = forms.CharField(label='Address', max_length=75)
+    state = forms.CharField(label='State', max_length=75)
+    city = forms.CharField(label='City', max_length=75)
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)])
+    card_type = forms.CharField(label='Card Type')
+    card_number = forms.CharField(label='Card Number')
+    expiration_date = forms.DateField(label='Expiration Date')
+
+    class Meta:
+        model = User
+        fields = (
+            'address',
+            'state',
+            'city',
+            'zip_code',
+            'card_type',
+            'card_number',
+            'expiration_date',
+        )
+        exclude = (
+            'email',
+            'username',
+            'first_name',
+            'last_name',
+            'phone'
+        )
+

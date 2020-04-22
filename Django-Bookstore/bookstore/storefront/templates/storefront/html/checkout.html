@@ -1,77 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../css/TermProject.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'storefront/css/TermProject.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title></title>
     <script></script>
 </head>
-
 <body>
-
-  <nav class="nav navbar-default">
+    <nav class="nav navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="home.html" class="navbar-brand">BOOKSTORE TITLE</a>
+                <a href="../home" class="navbar-brand">BOOKSTORE TITLE</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="search.html"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="home.html">LOGOUT</a></li>
+                <li><a href="../../logout">LOGOUT</a></li>
                 <li><a href="mycart.html">MY CART</a></li>
             </ul>
         </div>
     </nav>
-    
+
     <div class="container">
-        <div class="row">
-            <h1>Payment</h1>
-        </div>
-        <div>
-            <form>
-                <div class="row">
-                        <label for="firstName">First name</label>
-                        <input type="text" placeholder="First Name" value="" size ="100">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" placeholder="Last Name" value="" size ="100">
-                     <label for="address">Shipping Address</label>
-                        <input type="text" placeholder="Street Address" value="" size ="100">
-                     <label for="address2">Address 2</label>
-                        <input type="text" placeholder="Apt #" value="" size ="100">
-                    </div>
-                <div class="row">
-                        <label for="country">Country</label>
-                        <select class="custom-select d-block w-100" id="country" required>
-                            <option value="">Choose...</option>
-                            <option>United States</option>
-                        </select>
-
-                        <label for="state">State</label>
-                        <select class="custom-select d-block w-100" id="state" required>
-                            <option value="">Choose...</option>
-                            <option>GA</option>
-                        </select>
-                        <label for="zip">Zip</label>
-                        <input type="text" placeholder="zip code" value="">
-                   
+        <form method="POST" class="form-horizontal">
+            {% csrf_token %}
+            <div>
+                <p>CHECKOUT</p>
+                {{ x }}
+            </div>
+           <div class="form-group">
+                <p>Personal Information</p>
+                <label class="contol-label col-sm-2">Email</label>
+                <div class="col-sm-10">
+                    {{ user.email }}
+<!--                    <input id="your_name" type="text" name="your_name" class="user-control" value="{{ user.first_name.value }}" required>-->
                 </div>
-                <div class="row payment">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action"> Card ending in 5746</a>
-                        <a href="#" class="list-group-item list-group-item-action">Card Ending in 5833</a>
-                    </div>
+                <label class="contol-label col-sm-2">First Name:</label>
+                <div class="col-sm-10">
+                    {{ user.first_name }}
+<!--                    <input id="your_name" type="text" name="your_name" class="user-control" value="{{ user.first_name.value }}" required>-->
                 </div>
-            </form>
-        </div>
-            <button type="button">Add Card</button>
-        <button>    <a href="orderconfirm.html">Checkout
-          </a></button>
+                <label class="contol-label col-sm-2">Last Name:</label>
+                <div class="col-sm-10">
+                    {{ user.last_name }}
+<!--                    <input class="user-control" required>-->
+                </div>
+                 <label class="contol-label col-sm-2">Phone Number</label>
+                <div class="col-sm-10">
+                    {{ user.phone }}
+<!--                    <input id="your_name" type="text" name="your_name" class="user-control" value="{{ user.first_name.value }}" required>-->
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Address</p>
+                <label class="contol-label col-sm-2">Address: </label>
+                <div class="col-sm-10">
+                    {{ form.address }}
+                    {{ form.address.errors }}
+<!--                    <input class="form-control">-->
+                </div>
+                <label class="contol-label col-sm-2">City: </label>
+                <div class="col-sm-10">
+                    {{ form.city }}
+                    {{ form.city.errors }}
+<!--                    <input class="form-control">-->
+                </div>
+                <label class="contol-label col-sm-2">State: </label>
+                <div class="col-sm-10">
+                    {{ form.state }}
+                    {{ form.state.errors }}
+<!--                    <input class="form-control">-->
+                </div>
+                <label class="contol-label col-sm-2">Zip Code: </label>
+                <div class="col-sm-10">
+                    {{ form.zip_code }}
+                    {{ form.zip_code.errors }}
+<!--                    <input class="form-control">-->
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Card Information</p>
+                <label class="contol-label col-sm-2">Card Type: </label>
+                <div class="col-sm-10">
+                    {{ form.card_type }}
+                    {{ form.card_type.errors }}
+<!--                    <input class="form-control">-->
+                </div>
+                <label class="contol-label col-sm-2">Card Number: </label>
+                <div class="col-sm-10">
+                    {{ form.card_number }}
+                    {{ form.card_number.errors }}
+<!--                    <input class="form-control">-->
+                </div>
+                <label class="contol-label col-sm-2">Expiration Date: </label>
+                <div class="col-sm-10">
+                    {{ form.expiration_date }}
+                    {{ form.expiration_date.errors }}
+<!--                    <input class="form-control">-->
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit Order" class="btn btn-default">
+            </div>
+        </form>
     </div>
-
-
 </body>
-
 </html>
