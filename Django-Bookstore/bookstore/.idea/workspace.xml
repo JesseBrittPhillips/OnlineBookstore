@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8f525832-93c6-4090-b872-476bf588fc1c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aXvS12dDCA6DtjCps5GKB91QE0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/storefront/templates/storefront/html" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Cloud(9)\Documents\softEngineering\Django-Bookstore\bookstore\storefront\templates\storefront\html" />
+    </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8f525832-93c6-4090-b872-476bf588fc1c" name="Default Changelist" comment="" />
+      <created>1586894748395</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586894748395</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="3821" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586903506838">
+      <screen x="3440" y="0" width="1920" height="1040" />
+    </state>
+    <state x="3821" y="326" key="#com.intellij.fileTypes.FileTypeChooser/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586903506838" />
+    <state x="450" y="505" key="com.intellij.ide.util.TipDialog" timestamp="1587139198043">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="450" y="505" key="com.intellij.ide.util.TipDialog/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1587139198043" />
+    <state x="450" y="505" key="com.intellij.ide.util.TipDialog/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1587100126364" />
+    <state x="2063" y="204" width="1077" height="1020" key="dock-window-1" timestamp="1586967983694">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2063" y="204" width="1077" height="1020" key="dock-window-1/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1586967983694" />
+    <state x="2269" y="24" width="1077" height="1020" key="dock-window-1/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586963459524" />
+    <state x="4075" y="46" width="1038" height="1020" key="dock-window-2" timestamp="1586962085136">
+      <screen x="3440" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4075" y="46" width="1038" height="1020" key="dock-window-2/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586962085136" />
+    <state x="798" y="308" width="1046" height="1020" key="dock-window-3" timestamp="1586966393840">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="798" y="308" width="1046" height="1020" key="dock-window-3/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1586966393840" />
+    <state x="3593" y="20" width="1046" height="1020" key="dock-window-3/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586965767683" />
+    <state x="4531" y="216" width="1108" height="1081" key="dock-window-4" timestamp="1586969819911">
+      <screen x="3440" y="0" width="1920" height="1040" />
+    </state>
+    <state x="3743" y="158" width="1108" height="1081" key="dock-window-4/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1586969416401" />
+    <state x="4531" y="216" width="1108" height="1081" key="dock-window-4/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586969819911" />
+    <state x="2441" y="25" width="886" height="1027" key="dock-window-5" timestamp="1586980950883">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2441" y="25" width="886" height="1027" key="dock-window-5/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586980950883" />
+  </component>
+</project>

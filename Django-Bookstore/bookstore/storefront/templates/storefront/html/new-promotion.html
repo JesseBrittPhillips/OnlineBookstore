@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bookstore</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="manager-view.html">WebSiteName - Manager View</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        
+            <li><a href="manage-users.html">MANAGE USERS</a></li>
+            <li><a href="#">MANAGE PROMOTIONS</a></li>
+            <li><a href="home.html">LOGOUT</a></li>
+        </ul>
+    </div>
+  </nav>
+<div class="container">
+  <h1 style="padding-bottom: 20px;">Promotions</h1>
+<table class="table">
+  <tr>
+
+    <th>Promotion</th>
+    <th>Percentage Off</th>
+    <th>Dates</th>
+  </tr>
+  <tr>
+    <td>BOGO</td>
+      <td>50%</td>
+      <td>2/1/20 - 3/1/20</td>
+    </tr>
+     <tr>
+    <td>Spring Break</td>
+      <td>25%</td>
+      <td>3/11/20 - 3/16/20</td>
+    </tr>
+</table>
+</div>      
+          <div id="adduser" role="dialog">
+
+                <form>
+                  <div class="form-group">
+                    <label>Add New Promotion</label>
+                    <input type="email" class="form-control" placeholder="Enter Name">
+                    <input type="email" class="form-control" placeholder="Enter Percentage">
+                    <input type="email" class="form-control" placeholder="Enter Dates">
+                  </div>
+                  <button type="submit"><a href="new-promotion.html">Add Promotion</a></button>
+                    
+              </form>
+        </div>
+    <br>
+    <div id="removeuser" role="dialog">
+                <form>
+                <div class="form-group">
+                    <label>Promotion List</label><br>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1"> BOGO<br>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1"> Spring Break<br>
+                 </div>
+                <button type="submit"><a href="manage-promotions.html">Remove User</a></button>
+                </form>
+            </div>
+
+    </body>
+</html>
