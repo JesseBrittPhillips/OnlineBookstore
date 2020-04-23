@@ -1,6 +1,7 @@
 from .models import *
 from .forms import *
-from django.http import HttpResponse, Http404, get_object_or_404
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
