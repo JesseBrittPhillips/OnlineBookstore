@@ -20,7 +20,7 @@ class CustomerRegForm(UserCreationForm):
     address = forms.CharField(label='Address', max_length=75, required=False)
     state = forms.CharField(label='State', max_length=75, required=False)
     city = forms.CharField(label='City', max_length=75, required=False)
-    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)])
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)], required=False)
     card_type = forms.CharField(label='Card Type', max_length=75, required=False)
     card_number = forms.CharField(label='Card Number', max_length=75, required=False)
     expiration_date = forms.DateField(label='Expiration Date', required=False)
@@ -68,13 +68,12 @@ class CustomerRegForm(UserCreationForm):
         return user
 
 
-
 class CustomerEdit(UserChangeForm):
     phone = forms.CharField(label='Phone Number', max_length=75)
     address = forms.CharField(label='Address', max_length=75, required=False)
     state = forms.CharField(label='State', max_length=75, required=False)
     city = forms.CharField(label='City', max_length=75, required=False)
-    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)])
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)], required=False)
     card_type = forms.CharField(label='Card Type', max_length=75, required=False)
     card_number = forms.CharField(label='Card Number', max_length=75, required=False)
     promotions = forms.BooleanField(label='promotions', required=False)
