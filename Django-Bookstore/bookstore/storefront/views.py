@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Customers, Inventory
-from .forms import CustomerRegForm, CustomerLoginForm, CustomerEdit, CheckEmailForm, Checkout
-from django.http import HttpResponse, Http404
+from .models import *
+from .forms import *
+from django.http import HttpResponse, Http404, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -15,6 +14,41 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 
 User = get_user_model()
+
+
+def InventoryView(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            x = "hi"
+        else:
+            return redirect('/home')
+    else:
+        return redirect('/home')
+    booklist = Inventory.objects.all()
+    context = {
+        'booklist' : booklist
+    }
+    return render(request, 'storefront/html/inventory.html', context)
+
+
+def InventoryaddView(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            x="hi"
+        else:
+            return redirect('/home')
+    else:
+        return redirect('/home')
+    if request.method == 'POST':
+        form = InventoryForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/home')
+    else:
+        form = InventoryForm()
+    return render(request, 'storefront/html/inventory-add.html', {'form': form})
+
 
 def activate(request, uidb64, token):
     try:
@@ -134,7 +168,7 @@ def home_view(request):
     if request.user.is_authenticated:
         x=1
         if request.user.is_staff:
-            return redirect('/admin')
+            return redirect('/inventory')
 
     context = {'x':x}
     return render(request, "storefront/html/home.html", context)

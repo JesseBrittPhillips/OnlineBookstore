@@ -15,18 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls import include
 from django.contrib.auth import views as auth_views
 
-from storefront.views import (
-    customer_reg_view, customer_reg_complete_view, customer_login_view, forgot_view,
-    home_view, loggedin_view, register, activate, view_profile, edit_profile, changepassword,
-    activated, checkout, order_confirm, delete
-)
+from storefront.views import *
 
 
 
 urlpatterns = [
+
+    path('inventory', InventoryView),
+    path('inventory/add', InventoryaddView),
     path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html')),
     path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/home.html')),
     path('register/', register),
@@ -49,4 +51,5 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='storefront/html/password_reset_complete.html'), name='password_reset_complete'),
     path('delete/<slug>', delete, name='delete'),
 ]
-
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

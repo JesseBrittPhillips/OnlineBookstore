@@ -1,4 +1,4 @@
-% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +17,24 @@
                 <a href="../home" class="navbar-brand">BOOKSTORE TITLE</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="search.html"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="../login">LOGIN</a></li>
-                <li><a href="mycart.html">MY CART</a></li>
+                <li><a href="../logout">LOGOUT</a></li>
+                <li><a href="/inventory/add">ADD BOOK</a></li>
             </ul>
         </div>
     </nav>
 
+    <div>
+        {% for book in booklist %}
+            <li class="col-md-4">
+                    {%if book.title%}
+                        {{ book.title }}
+                    {%endif%}
+                    {%if book.pic.url%}
+                         <img src="{{book.pic.url}}" alt="Coffee" style="width:100%;">
+                    {%endif%}
+            </li>
+        {% endfor %}
+    </div>
 
 </body>
 </html>
