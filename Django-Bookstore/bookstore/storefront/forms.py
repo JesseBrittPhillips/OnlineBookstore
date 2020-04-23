@@ -1,12 +1,34 @@
 from django import forms
 
-from .models import Customers
+from .models import *
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, UserChangeForm
 from django.core.validators import MaxValueValidator
 
 User = get_user_model()
 
+
+
+class InventoryForm():
+
+    class Meta:
+        model = Inventory
+        fields = (
+            'bookid',
+            'title',
+            'authors',
+            'coverpicid',
+            'buyprice',
+            'sell_price',
+            'minimum',
+            'category',
+            'number_of_copies',
+            'publisher',
+            'editor',
+            'isbn',
+            'datepublished'
+            'pic'
+        )
 
 class CheckEmailForm(forms.ModelForm):
     class Meta:
@@ -20,7 +42,7 @@ class CustomerRegForm(UserCreationForm):
     address = forms.CharField(label='Address', max_length=75, required=False)
     state = forms.CharField(label='State', max_length=75, required=False)
     city = forms.CharField(label='City', max_length=75, required=False)
-    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)])
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)], required = False)
     card_type = forms.CharField(label='Card Type', max_length=75, required=False)
     card_number = forms.CharField(label='Card Number', max_length=75, required=False)
     expiration_date = forms.DateField(label='Expiration Date', required=False)
@@ -74,7 +96,7 @@ class CustomerEdit(UserChangeForm):
     address = forms.CharField(label='Address', max_length=75, required=False)
     state = forms.CharField(label='State', max_length=75, required=False)
     city = forms.CharField(label='City', max_length=75, required=False)
-    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)])
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)], required = False)
     card_type = forms.CharField(label='Card Type', max_length=75, required=False)
     card_number = forms.CharField(label='Card Number', max_length=75, required=False)
     promotions = forms.BooleanField(label='promotions', required=False)

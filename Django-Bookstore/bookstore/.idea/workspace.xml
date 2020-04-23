@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f525832-93c6-4090-b872-476bf588fc1c" name="Default Changelist" comment="" />
+    <list default="true" id="8f525832-93c6-4090-b872-476bf588fc1c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/storefront/templates/storefront/html/inventory-add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storefront/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storefront/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storefront/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +22,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1aXvS12dDCA6DtjCps5GKB91QE0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -60,16 +72,20 @@
       <screen x="3440" y="0" width="1920" height="1040" />
     </state>
     <state x="3821" y="326" key="#com.intellij.fileTypes.FileTypeChooser/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586903506838" />
+    <state x="3475" y="117" key="CommitChangelistDialog2" timestamp="1587605968698">
+      <screen x="3440" y="0" width="1920" height="1040" />
+    </state>
+    <state x="3475" y="117" key="CommitChangelistDialog2/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1587605968698" />
     <state x="450" y="505" key="com.intellij.ide.util.TipDialog" timestamp="1587139198043">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="450" y="505" key="com.intellij.ide.util.TipDialog/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1587139198043" />
     <state x="450" y="505" key="com.intellij.ide.util.TipDialog/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1587100126364" />
-    <state x="2063" y="204" width="1077" height="1020" key="dock-window-1" timestamp="1586967983694">
-      <screen x="0" y="0" width="3440" height="1400" />
+    <state x="4393" y="0" width="974" height="1047" key="dock-window-1" timestamp="1587605548996">
+      <screen x="3440" y="0" width="1920" height="1040" />
     </state>
-    <state x="2063" y="204" width="1077" height="1020" key="dock-window-1/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1586967983694" />
-    <state x="2269" y="24" width="1077" height="1020" key="dock-window-1/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586963459524" />
+    <state x="176" y="245" width="935" height="1021" key="dock-window-1/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1587603416046" />
+    <state x="4393" y="0" width="974" height="1047" key="dock-window-1/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1587605548996" />
     <state x="4075" y="46" width="1038" height="1020" key="dock-window-2" timestamp="1586962085136">
       <screen x="3440" y="0" width="1920" height="1040" />
     </state>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Customers
-from .forms import CustomerRegForm, CustomerLoginForm, CustomerEdit, CheckEmailForm, Checkout
+from .models import *
+from .forms import *
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.sites.shortcuts import get_current_site
@@ -15,6 +15,19 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 
 User = get_user_model()
+
+
+def InventoryView(request):
+    if request.method == 'POST':
+        form = InventoryForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/home')
+    else:
+        form = InventoryForm()
+    return render(request, 'inventory-add.html', {'form': form})
+
 
 def activate(request, uidb64, token):
     try:

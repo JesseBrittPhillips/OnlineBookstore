@@ -18,15 +18,12 @@ from django.urls import path
 from django.conf.urls import include
 from django.contrib.auth import views as auth_views
 
-from storefront.views import (
-    customer_reg_view, customer_reg_complete_view, customer_login_view, forgot_view,
-    home_view, loggedin_view, register, activate, view_profile, edit_profile, changepassword,
-    activated, checkout, order_confirm
-)
+from storefront.views import *
 
 
 
 urlpatterns = [
+    path('inventory/add', InventoryView),
     path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html')),
     path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/home.html')),
     path('register/', register),
