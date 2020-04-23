@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f525832-93c6-4090-b872-476bf588fc1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/Django-Bookstore.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storefront/templates/profile_changed_email.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/templates/storefront/html/inventory.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storefront/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storefront/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/views.py" afterDir="false" />
     </list>

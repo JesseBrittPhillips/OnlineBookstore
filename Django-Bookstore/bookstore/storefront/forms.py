@@ -9,7 +9,7 @@ User = get_user_model()
 
 
 
-class InventoryForm():
+class InventoryForm(forms.ModelForm):
 
     class Meta:
         model = Inventory
@@ -17,16 +17,15 @@ class InventoryForm():
             'bookid',
             'title',
             'authors',
-            'coverpicid',
             'buyprice',
             'sell_price',
-            'minimum',
+            'minumum',
             'category',
             'number_of_copies',
             'publisher',
             'editor',
             'isbn',
-            'datepublished'
+            'datepublished',
             'pic'
         )
 

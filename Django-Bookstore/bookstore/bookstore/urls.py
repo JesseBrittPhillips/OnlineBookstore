@@ -23,7 +23,8 @@ from storefront.views import *
 
 
 urlpatterns = [
-    path('inventory/add', InventoryView),
+    path('inventory', InventoryView),
+    path('inventory/add', InventoryaddView),
     path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html')),
     path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/home.html')),
     path('register/', register),

@@ -18,6 +18,28 @@ User = get_user_model()
 
 
 def InventoryView(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            x = "hi"
+        else:
+            return redirect('/home')
+    else:
+        return redirect('/home')
+    booklist = Inventory.objects.all()
+    context = {
+        'booklist' : booklist
+    }
+    return render(request, 'storefront/html/inventory.html', context)
+
+
+def InventoryaddView(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            x="hi"
+        else:
+            return redirect('/home')
+    else:
+        return redirect('/home')
     if request.method == 'POST':
         form = InventoryForm(request.POST, request.FILES)
 
@@ -26,7 +48,7 @@ def InventoryView(request):
             return redirect('/home')
     else:
         form = InventoryForm()
-    return render(request, 'inventory-add.html', {'form': form})
+    return render(request, 'storefront/html/inventory-add.html', {'form': form})
 
 
 def activate(request, uidb64, token):
@@ -147,7 +169,7 @@ def home_view(request):
     if request.user.is_authenticated:
         x=1
         if request.user.is_staff:
-            return redirect('/admin')
+            return redirect('/inventory')
 
     context = {'x':x}
     return render(request, "storefront/html/home.html", context)
