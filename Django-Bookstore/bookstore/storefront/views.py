@@ -166,7 +166,21 @@ def edit_profile(request):
     if request.method == 'POST':
         form = CustomerEdit(request.POST, instance=request.user)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.save()
+            current_site = get_current_site(request)
+            mail_subject = 'Profile Changed'
+            message = render_to_string('profile_changed_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            to_email = user.email
+            email = EmailMessage(
+                mail_subject, message, to=[to_email]
+            )
+            email.send()
             return redirect('../profile')
     else:
         form = CustomerEdit(instance=request.user)
