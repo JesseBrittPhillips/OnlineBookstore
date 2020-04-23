@@ -28,7 +28,8 @@ FIELD_ENCRYPTION_KEY = os.environ.get('key','nNjpIl9Ax2LRtm-p6ryCRZ8lRsL0DtuY0f9
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'storefront/media/'
+MEDIA_URL = '/media/'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
