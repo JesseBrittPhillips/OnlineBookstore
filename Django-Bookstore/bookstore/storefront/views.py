@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
-from .models import Customers
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Customers, Inventory
 from .forms import CustomerRegForm, CustomerLoginForm, CustomerEdit, CheckEmailForm, Checkout
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.contrib.auth import login, authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -223,3 +223,10 @@ def changepassword(request):
     return render(request, 'storefront/html/changepassword.html', {
         'form': form
     })
+
+def delete(request, slug):
+    if not request.user.is_staff:
+        raise Http404
+    book = get_object_or_404(Inventory, slug=slug)
+    book.delete()
+    request.redirect()

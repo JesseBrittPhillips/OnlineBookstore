@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 from storefront.views import (
     customer_reg_view, customer_reg_complete_view, customer_login_view, forgot_view,
     home_view, loggedin_view, register, activate, view_profile, edit_profile, changepassword,
-    activated, checkout, order_confirm
+    activated, checkout, order_confirm, delete
 )
 
 
@@ -47,5 +47,6 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='storefront/html/password_reset_done.html'), name='password_reset_done'),
     path('reset/<slug:uidb64>/<slug:token>/', auth_views.PasswordResetConfirmView.as_view(template_name='storefront/html/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='storefront/html/password_reset_complete.html'), name='password_reset_complete'),
+    path('delete/<slug>', delete, name='delete'),
 ]
 
