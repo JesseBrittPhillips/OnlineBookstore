@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from django.conf.urls import include
 from django.contrib.auth import views as auth_views
 
@@ -23,6 +25,7 @@ from storefront.views import *
 
 
 urlpatterns = [
+
     path('inventory', InventoryView),
     path('inventory/add', InventoryaddView),
     path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html')),
@@ -47,3 +50,6 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='storefront/html/password_reset_complete.html'), name='password_reset_complete'),
 ]
 
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
