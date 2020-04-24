@@ -23,21 +23,15 @@
         </div>
     </nav>
 
-    <div>
-        <table>
-            <tr>
-                <th>Book Title</th>
-                <th>Image</th>
-                <th>Delete Book</th>
-            </tr>
-            {% for book in booklist %}
-                <tr>
-                    <td>{{ book.title }}</td>
-                    <td><img src="{{book.pic.url}}" alt="Coffee" style="width:100px;"></td>
-                    <td><a href="{% url 'delete' bid=book.bookid %}"><button type="button" class="btn btn-default">Delete</button></a></td>
-                </tr>
-            {% endfor %}
-        </table>
+    <div id="book" class="container">
+        <div>
+            <p>{{ book.title }}</p>
+            <p>${{ book.buyprice }}</p>
+        </div>
+        <div>
+            <img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:40%;">
+        </div>
+        <a href="#"><button type="button" class="btn btn-default">Add To Cart</button></a>
     </div>
 
 </body>

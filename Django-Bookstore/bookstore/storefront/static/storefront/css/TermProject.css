@@ -21,3 +21,7 @@ form div {
 .regComp {
   text-align: center;
 }
+
+.book div {
+    display: inline-block;
+}

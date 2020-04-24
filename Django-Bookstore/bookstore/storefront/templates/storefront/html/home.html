@@ -45,7 +45,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <div class="item active">
-            <img src="{% static 'storefront/images/girlReading.jpg' %}" alt="Girl" style="width:100%;">
+              <img src="{% static 'storefront/images/girlReading.jpg' %}" alt="Girl" style="width:100%;">
           </div>
 
           <div class="item">
@@ -68,39 +68,20 @@
         </a>
       </div>
     </div>
-    
+
     <div class="container">
         <h1>TOP SELLING BOOKS</h1>
         <div class="row">
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body"><a href="bookdetail.html">
-                        <img src="{% static 'storefront/images/LoR.jpg' %}" alt="Coffee" style="width:100%;">
-                        </a>
+            {% for book in books %}
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-body"><a href="{% url 'book' bid=book.bookid %}">
+                            <img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:100%;">
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="{% static 'storefront/images/Lion.jpg' %}" alt="Coffee" style="width:100%;">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="{% static 'storefront/images/Hobbit.jpg' %}" alt="Coffee" style="width:100%;">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="{% static 'storefront/images/HP.jpg' %}" alt="Coffee" style="width:100%;">
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </body>

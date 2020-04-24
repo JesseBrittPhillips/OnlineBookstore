@@ -31,7 +31,6 @@ def InventoryView(request):
     }
     return render(request, 'storefront/html/inventory.html', context)
 
-
 def InventoryaddView(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
@@ -50,6 +49,12 @@ def InventoryaddView(request):
         form = InventoryForm()
     return render(request, 'storefront/html/inventory-add.html', {'form': form})
 
+def book(request, bid):
+    book = Inventory.objects.get(pk=bid)
+    context = {
+        'book': book
+    }
+    return render(request, 'storefront/html/book.html', context)
 
 def activate(request, uidb64, token):
     try:
@@ -115,6 +120,10 @@ def activated(request):
     context = {}
     return render(request, "storefront/html/verificationComplete.html", context)
 
+def loggedout(request):
+    context = {}
+    return render(request, "storefront/html/loggedout.html", context)
+
 def customer_reg_complete_view(request):
     context = {}
     return render(request, "storefront/html/registrationComplete.html", context)
@@ -166,12 +175,16 @@ def forgot_view(request):
 
 def home_view(request):
     x = 0
+    books = Inventory.objects.all()
     if request.user.is_authenticated:
         x=1
         if request.user.is_staff:
             return redirect('/inventory')
 
-    context = {'x':x}
+    context = {
+        'x': x,
+        'books': books,
+    }
     return render(request, "storefront/html/home.html", context)
 
 def loggedin_view(request):
@@ -259,9 +272,9 @@ def changepassword(request):
         'form': form
     })
 
-def delete(request, slug):
+def delete(request, bid):
     if not request.user.is_staff:
         raise Http404
-    book = get_object_or_404(Inventory, slug=slug)
+    book = Inventory.objects.get(pk=bid)
     book.delete()
-    return redirect()
+    return redirect('/inventory')

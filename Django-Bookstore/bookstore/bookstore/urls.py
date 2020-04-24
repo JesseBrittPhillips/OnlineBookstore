@@ -30,7 +30,8 @@ urlpatterns = [
     path('inventory', InventoryView),
     path('inventory/add', InventoryaddView),
     path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html')),
-    path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/home.html')),
+    path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/loggedout.html')),
+    path('loggedout/', loggedout),
     path('register/', register),
     path('register/registrationComplete', customer_reg_complete_view),
     path('activate/<slug:uidb64>/<slug:token>/', activate, name='activate'),
@@ -49,7 +50,8 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='storefront/html/password_reset_done.html'), name='password_reset_done'),
     path('reset/<slug:uidb64>/<slug:token>/', auth_views.PasswordResetConfirmView.as_view(template_name='storefront/html/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='storefront/html/password_reset_complete.html'), name='password_reset_complete'),
-    path('delete/<slug>', delete, name='delete'),
+    path('delete/<slug:bid>/', delete, name='delete'),
+    path('book/<slug:bid>/', book, name='book'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
