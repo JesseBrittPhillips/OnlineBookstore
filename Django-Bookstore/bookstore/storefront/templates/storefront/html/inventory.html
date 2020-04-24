@@ -24,16 +24,18 @@
     </nav>
 
     <div>
-        {% for book in booklist %}
-            <li class="col-md-4">
-                    {%if book.title%}
-                        {{ book.title }}
-                    {%endif%}
-                    {%if book.pic.url%}
-                         <img src="{{book.pic.url}}" alt="Coffee" style="width:100%;">
-                    {%endif%}
-            </li>
-        {% endfor %}
+        <table>
+            <tr>
+                <th>Book Title</th>
+                <th>Image</th>
+            </tr>
+            {% for book in booklist %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td><img src="{{book.pic.url}}" alt="Coffee" style="width:100px;"></td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 
 </body>

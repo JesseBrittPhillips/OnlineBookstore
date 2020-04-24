@@ -264,4 +264,4 @@ def delete(request, slug):
         raise Http404
     book = get_object_or_404(Inventory, slug=slug)
     book.delete()
-    request.redirect()
+    return redirect()
