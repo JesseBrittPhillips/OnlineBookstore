@@ -23,7 +23,7 @@ def home_view(request):
     x = 0
     books = Inventory.objects.all()
     if request.user.is_authenticated:
-        x=1
+        x = 1
         if request.user.is_staff:
             return redirect('/inventory')
 
@@ -68,16 +68,6 @@ def InventoryaddView(request):
         form = InventoryForm()
     return render(request, 'storefront/html/inventory-add.html', {'form': form})
 
-########################################
-########Search Views####################
-#########################################
-
-def book(request, bid):
-    book = Inventory.objects.get(pk=bid)
-    context = {
-        'book': book
-    }
-    return render(request, 'storefront/html/book.html', context)
 
 
 ########################################
@@ -257,6 +247,30 @@ def edit_profile(request):
 ########################################
 ########Shopping Views####################
 #########################################
+def search(request):
+    x = 0
+    books = Inventory.objects.all()
+    if request.user.is_authenticated:
+        x = 1
+
+    context = {
+        'x': x,
+        'books': books,
+    }
+    return render(request, "storefront/html/search.html", context)
+
+def addtocart(request, bid):
+    cartuser = request.user
+    inv = Inventory.objects.get(pk=bid)
+
+    try:
+        cart = ShoppingCart.objects.get(custid=cartuser.id, invid=inv.bookid)
+        cart.quantity += 1
+    except:
+        cart = ShoppingCart.objects.create(custid=cartuser.id, invid=inv.bookid, quantity = 1)
+    cart.save()
+    return redirect('/search')
+
 def checkout(request):
     form = Checkout(request.POST, instance=request.user)
     if request.method == 'POST':
@@ -290,3 +304,13 @@ def order_confirm(request):
     return render(request, "storefront/html/orderconfirm.html", context)
 
 
+########################################
+########Search Views####################
+#########################################
+
+def book(request, bid):
+    book = Inventory.objects.get(pk=bid)
+    context = {
+        'book': book
+    }
+    return render(request, 'storefront/html/book.html', context)

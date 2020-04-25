@@ -13,12 +13,20 @@
     <nav class="nav navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="home.html" class="navbar-brand">BOOKSTORE TITLE</a>
+                <a href="" class="navbar-brand">BOOKSTORE TITLE</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="search.html"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="login.html">LOGIN</a></li>
-                <li><a href="mycart.html">MY CART</a></li>
+                {% if x %}
+                    <li><a href="../logout">LOGOUT</a></li>
+                    <li><a href="../profile">View Profile</a></li>
+                {% else %}
+                    <li><a href="../login">LOGIN</a></li>
+                {% endif %}
+
+                {%if user.is_staff%}
+                    <li><a href="../admin">Admin</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -43,5 +51,24 @@
             <button type="submit" class="btn btn-default">GO</button>
         </div>
     </form>
+    <div class="container">
+        <h1>BOOKS IN STOCK</h1>
+        <div class="row">
+            <table>
+            <tr>
+                <th>Book Title</th>
+                <th>Image</th>
+                <th>Delete Book</th>
+            </tr>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td><img src="{{book.pic.url}}" alt="Coffee" style="width:100px;"></td>
+                    <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add to Cart</button></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </div>
 </body>
 </html>
