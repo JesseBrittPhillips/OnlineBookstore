@@ -93,6 +93,9 @@ WSGI_APPLICATION = 'bookstore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bookstore',
+        'USER': 'root',
+        'PASSWORD': 'softengr',
         'OPTIONS': {
             'read_default_file': 'my.cnf',
         },
