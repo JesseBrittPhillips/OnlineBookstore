@@ -44,7 +44,7 @@ urlpatterns = [
     path('login/forgot', forgot_view),
     path('home/', home_view),
     path('admin/', admin.site.urls),
-    path('loggedin/', loggedin_view),
+    # path('loggedin/', loggedin_view),
     path('', home_view),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='storefront/html/password_reset_form.html'), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='storefront/html/password_reset_done.html'), name='password_reset_done'),
