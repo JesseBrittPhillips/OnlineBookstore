@@ -21,8 +21,8 @@ User = get_user_model()
 ########Home Page Views####################
 #########################################
 def home_view(request):
-    x = 0
     books = Inventory.objects.all()
+    x = 0
     if request.user.is_authenticated:
         x = 1
         if request.user.is_staff:
@@ -215,12 +215,19 @@ def forgot_view(request):
 ########Profile Views####################
 #########################################
 def view_profile(request):
+    x = 0
+    if request.user.is_authenticated:
+        x = 1
     context = {
+        'x' : x,
         'user': request.user
     }
     return render(request, "storefront/html/view_profile.html")
 
 def edit_profile(request):
+    x = 0
+    if request.user.is_authenticated:
+        x = 1
     if request.method == 'POST':
         form = CustomerEdit(request.POST, instance=request.user)
         if form.is_valid():
@@ -243,6 +250,7 @@ def edit_profile(request):
     else:
         form = CustomerEdit(instance=request.user)
     context = {
+        'x': x,
         'form': form
     }
     return render(request, "storefront/html/profile.html", context)
@@ -251,6 +259,9 @@ def edit_profile(request):
 ########Shopping Views####################
 #########################################
 def search(request):
+    x = 0
+    if request.user.is_authenticated:
+        x = 1
     search_term = request.GET.get('search')
     if search_term:
         books = Inventory.objects.filter(title__icontains=search_term)
@@ -258,11 +269,14 @@ def search(request):
         books = Inventory.objects.all()
 
     context = {
+        'x' : x,
         'books' : books
     }
     return render(request, "storefront/html/search.html", context)
 
 def addtocart(request, bid):
+    if not request.user.is_authenticated:
+        return redirect('../login')
     cartuser = request.user
     inv = Inventory.objects.get(pk=bid)
 
@@ -287,6 +301,9 @@ def removefromcart(request, bid):
     return redirect('mycart')
 
 def cartview(request):
+    x = 0
+    if request.user.is_authenticated:
+        x = 1
     cartuser = request.user
     cartlist = ShoppingCart.objects.filter(custid = cartuser.id)
     total = Decimal(0.00)
@@ -297,6 +314,7 @@ def cartview(request):
                 total = (cart.quantity * book.buyprice) + total
 
     context = {
+        'x' : x,
         'total' : total,
         'cartlist' : cartlist,
         'booklist' : booklist
@@ -304,6 +322,9 @@ def cartview(request):
     return render(request, "storefront/html/mycart.html", context)
 
 def checkout(request):
+    x = 0
+    if request.user.is_authenticated:
+        x = 1
     cartuser = request.user
     cartlist = ShoppingCart.objects.filter(custid=cartuser.id)
     for cart in cartlist:
@@ -348,8 +369,12 @@ def order_confirm(request):
 #########################################
 
 def book(request, bid):
+    x = 0
+    if request.user.is_authenticated:
+        x = 1
     book = Inventory.objects.get(pk=bid)
     context = {
+        'x' : book,
         'book': book
     }
     return render(request, 'storefront/html/book.html', context)
