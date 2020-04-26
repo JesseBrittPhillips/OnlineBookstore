@@ -18,17 +18,13 @@
                 <a href="" class="navbar-brand">Flip The Page</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../search"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="../mycart"> MY CART</a></li>
+                <li><a href="{% url 'search' %}"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
+                <li><a href="{% url 'mycart' %}"> MY CART</a></li>
                 {% if x %}
-                    <li><a href="../logout">LOGOUT</a></li>
-                    <li><a href="../profile">View Profile</a></li>
+                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    <li><a href="{% url 'view_profile' %}">VIEW PROFILE</a></li>
                 {% else %}
-                    <li><a href="../login">LOGIN</a></li>
-                {% endif %}
-
-                {%if user.is_staff%}
-                    <li><a href="../admin">Admin</a></li>
+                    <li><a href="{% url 'login' %}">LOGIN</a></li>
                 {% endif %}
             </ul>
         </div>

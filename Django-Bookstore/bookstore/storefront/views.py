@@ -141,31 +141,6 @@ def loggedout(request):
     return render(request, "storefront/html/loggedout.html", context)
 
 
-def customer_login_view(request):
-    x = 0
-    y = ""
-    form = CustomerLoginForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        for cust in Customers.objects.raw('SELECT * FROM bookstore.customers'):
-            if(cust.email == user.email):
-                if(cust.password == user.password):
-                    y=""
-                    x=1
-                else:
-                    y="please enter the correct email/password"
-            else:
-                y = "please enter the correct email/password"
-    context = {
-        'form': form,
-        'x':x,
-        'y':y,
-    }
-    if(x):
-        return redirect('/loggedin')
-    else:
-        return render(request, "storefront/html/login.html", context)
-
 ########################################
 ########Password Views####################
 #########################################
@@ -208,9 +183,6 @@ def forgot_view(request):
         return render(request, "storefront/html/forgot.html", context)
 
 
-# def loggedin_view(request):
-#     context = {}
-#     return render(request, "storefront/html/loggedin.html", context)
 ########################################
 ########Profile Views####################
 #########################################
@@ -220,9 +192,9 @@ def view_profile(request):
         x = 1
     context = {
         'x' : x,
-        'user': request.user
+        'user': request.user,
     }
-    return render(request, "storefront/html/view_profile.html")
+    return render(request, "storefront/html/view_profile.html", context)
 
 def edit_profile(request):
     x = 0
@@ -251,7 +223,7 @@ def edit_profile(request):
         form = CustomerEdit(instance=request.user)
     context = {
         'x': x,
-        'form': form
+        'form': form,
     }
     return render(request, "storefront/html/profile.html", context)
 
@@ -276,7 +248,7 @@ def search(request):
 
 def addtocart(request, bid):
     if not request.user.is_authenticated:
-        return redirect('../login')
+        return redirect('login')
     cartuser = request.user
     inv = Inventory.objects.get(pk=bid)
 
@@ -304,6 +276,8 @@ def cartview(request):
     x = 0
     if request.user.is_authenticated:
         x = 1
+    else:
+        return redirect('login')
     cartuser = request.user
     cartlist = ShoppingCart.objects.filter(custid = cartuser.id)
     total = Decimal(0.00)

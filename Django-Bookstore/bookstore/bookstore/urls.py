@@ -31,8 +31,8 @@ urlpatterns = [
     path('inventory/add', InventoryaddView),
     path('delete/<slug:bid>/', delete, name='delete'),
 
-    path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html')),
-    path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/loggedout.html')),
+    path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/loggedout.html'), name='logout'),
     path('loggedout/', loggedout),
     path('login/forgot', forgot_view),
 
