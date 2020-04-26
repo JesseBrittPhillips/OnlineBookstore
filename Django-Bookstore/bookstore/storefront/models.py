@@ -3,6 +3,9 @@ from encrypted_model_fields.fields import EncryptedCharField
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.models import PermissionsMixin
+import json
+
+
 
 # Create your models here.
 class AuthGroup(models.Model):
@@ -186,7 +189,6 @@ class Inventory(models.Model):
     bookid = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45, blank=True, null=True)
     authors = models.CharField(max_length=45, blank=True, null=True)
-    # coverpicid = models.ForeignKey(Coverpictures, models.DO_NOTHING, db_column='coverPicID', blank=True, null=True)  # Field name made lowercase.
     buyprice = models.DecimalField(db_column='BuyPrice', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
     sell_price = models.DecimalField(db_column='Sell Price', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     minumum = models.IntegerField(blank=True, null=True)
@@ -245,8 +247,10 @@ class Promotions(models.Model):
 class ShoppingCart(models.Model):
     cartid = models.AutoField(db_column='cartID', primary_key=True)  # Field name made lowercase.
     custid = models.IntegerField(db_column='CustID', blank=True, null=True)  # Field name made lowercase.
-    books = models.CharField(db_column='Books', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    invid = models.IntegerField(db_column='invID', blank=True, null=True)  # Field name made lowercase.
+    quantity = models.IntegerField(db_column='quantity')  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'shopping cart'
+

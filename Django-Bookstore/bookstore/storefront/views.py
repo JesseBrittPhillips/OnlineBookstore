@@ -13,18 +13,43 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from decimal import *
 
 User = get_user_model()
 
+########################################
+########Home Page Views####################
+#########################################
+def home_view(request):
+    x = 0
+    books = Inventory.objects.all()
+    if request.user.is_authenticated:
+        x = 1
+        if request.user.is_staff:
+            return redirect('/inventory')
+
+    context = {
+        'x': x,
+        'books': books,
+    }
+    return render(request, "storefront/html/home.html", context)
+
+
+
+
+########################################
+########Admin Views####################
+#########################################
+def delete(request, bid):
+    if not request.user.is_staff:
+        raise Http404
+    book = Inventory.objects.get(pk=bid)
+    book.delete()
+    return redirect('/inventory')
 
 def InventoryView(request):
-    if request.user.is_authenticated:
-        if request.user.is_staff:
-            x = "hi"
-        else:
-            return redirect('/home')
-    else:
-        return redirect('/home')
+    if not request.user.is_staff:
+        raise Http404
     booklist = Inventory.objects.all()
     context = {
         'booklist' : booklist
@@ -32,13 +57,8 @@ def InventoryView(request):
     return render(request, 'storefront/html/inventory.html', context)
 
 def InventoryaddView(request):
-    if request.user.is_authenticated:
-        if request.user.is_staff:
-            x="hi"
-        else:
-            return redirect('/home')
-    else:
-        return redirect('/home')
+    if not request.user.is_staff:
+        raise Http404
     if request.method == 'POST':
         form = InventoryForm(request.POST, request.FILES)
 
@@ -49,13 +69,11 @@ def InventoryaddView(request):
         form = InventoryForm()
     return render(request, 'storefront/html/inventory-add.html', {'form': form})
 
-def book(request, bid):
-    book = Inventory.objects.get(pk=bid)
-    context = {
-        'book': book
-    }
-    return render(request, 'storefront/html/book.html', context)
 
+
+########################################
+########Registration Views####################
+#########################################
 def activate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64)
@@ -105,40 +123,23 @@ def register(request):
     }
     return render(request, "storefront/html/registration.html", context)
 
-# Create your views here.
-def customer_reg_view(request):
-    form = CustomerRegForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-
-    context = {
-        'form': form
-    }
-    return render(request, "storefront/html/registration.html", context)
 
 def activated(request):
     context = {}
     return render(request, "storefront/html/verificationComplete.html", context)
 
-def loggedout(request):
-    context = {}
-    return render(request, "storefront/html/loggedout.html", context)
 
 def customer_reg_complete_view(request):
     context = {}
     return render(request, "storefront/html/registrationComplete.html", context)
 
-def search(request):
-    search_term = request.GET.get('search')
-    if search_term:
-        books = Inventory.objects.filter(title__icontains=search_term)
-    else:
-        books = Inventory.objects.all()
+########################################
+########Login/Logout Views####################
+#########################################
+def loggedout(request):
+    context = {}
+    return render(request, "storefront/html/loggedout.html", context)
 
-    context = {
-        'books' : books
-    }
-    return render(request, "storefront/html/search.html", context)
 
 def customer_login_view(request):
     x = 0
@@ -165,6 +166,27 @@ def customer_login_view(request):
     else:
         return render(request, "storefront/html/login.html", context)
 
+########################################
+########Password Views####################
+#########################################
+
+def changepassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('../home')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'storefront/html/changepassword.html', {
+        'form': form
+    })
+
+
 def forgot_view(request):
     x = 0
     form = CustomerLoginForm(request.POST or None)
@@ -185,24 +207,13 @@ def forgot_view(request):
     else:
         return render(request, "storefront/html/forgot.html", context)
 
-def home_view(request):
-    x = 0
-    books = Inventory.objects.all()
-    if request.user.is_authenticated:
-        x=1
-        if request.user.is_staff:
-            return redirect('/inventory')
 
-    context = {
-        'x': x,
-        'books': books,
-    }
-    return render(request, "storefront/html/home.html", context)
-
-def loggedin_view(request):
-    context = {}
-    return render(request, "storefront/html/loggedin.html", context)
-
+# def loggedin_view(request):
+#     context = {}
+#     return render(request, "storefront/html/loggedin.html", context)
+########################################
+########Profile Views####################
+#########################################
 def view_profile(request):
     context = {
         'user': request.user
@@ -236,6 +247,62 @@ def edit_profile(request):
     }
     return render(request, "storefront/html/profile.html", context)
 
+########################################
+########Shopping Views####################
+#########################################
+def search(request):
+    search_term = request.GET.get('search')
+    if search_term:
+        books = Inventory.objects.filter(title__icontains=search_term)
+    else:
+        books = Inventory.objects.all()
+
+    context = {
+        'books' : books
+    }
+    return render(request, "storefront/html/search.html", context)
+
+def addtocart(request, bid):
+    cartuser = request.user
+    inv = Inventory.objects.get(pk=bid)
+
+    try:
+        cart = ShoppingCart.objects.get(custid=cartuser.id, invid=inv.bookid)
+        cart.quantity += 1
+    except:
+        cart = ShoppingCart.objects.create(custid=cartuser.id, invid=inv.bookid, quantity = 1)
+    cart.save()
+    return redirect('mycart')
+
+def removefromcart(request, bid):
+    cartuser = request.user
+    inv = Inventory.objects.get(pk=bid)
+
+    cart = ShoppingCart.objects.get(custid=cartuser.id, invid=inv.bookid)
+    cart.quantity -= 1
+    if(cart.quantity == 0):
+        cart.delete()
+    else:
+        cart.save()
+    return redirect('mycart')
+
+def cartview(request):
+    cartuser = request.user
+    cartlist = ShoppingCart.objects.filter(custid = cartuser.id)
+    total = Decimal(0.00)
+    booklist = Inventory.objects.all()
+    for cart in cartlist:
+        for book in booklist:
+            if cart.invid == book.bookid:
+                total = (cart.quantity * book.buyprice) + total
+
+    context = {
+        'total' : total,
+        'cartlist' : cartlist,
+        'booklist' : booklist
+    }
+    return render(request, "storefront/html/mycart.html", context)
+
 def checkout(request):
     form = Checkout(request.POST, instance=request.user)
     if request.method == 'POST':
@@ -268,25 +335,14 @@ def order_confirm(request):
     context = {}
     return render(request, "storefront/html/orderconfirm.html", context)
 
-def changepassword(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
-            return redirect('../home')
-        else:
-            messages.error(request, 'Please correct the error below.')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'storefront/html/changepassword.html', {
-        'form': form
-    })
 
-def delete(request, bid):
-    if not request.user.is_staff:
-        raise Http404
+########################################
+########Search Views####################
+#########################################
+
+def book(request, bid):
     book = Inventory.objects.get(pk=bid)
-    book.delete()
-    return redirect('/inventory')
+    context = {
+        'book': book
+    }
+    return render(request, 'storefront/html/book.html', context)
