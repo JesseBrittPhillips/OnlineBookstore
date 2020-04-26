@@ -304,6 +304,7 @@ def cartview(request):
     return render(request, "storefront/html/mycart.html", context)
 
 def checkout(request):
+    cartuser = request.user
     form = Checkout(request.POST, instance=request.user)
     if request.method == 'POST':
         if form.is_valid():
