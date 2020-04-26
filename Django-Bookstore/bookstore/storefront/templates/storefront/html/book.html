@@ -31,7 +31,7 @@
         <div>
             <img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:40%;">
         </div>
-        <a href="#"><button type="button" class="btn btn-default">Add To Cart</button></a>
+        <a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add to Cart</button></a>
     </div>
 
 </body>

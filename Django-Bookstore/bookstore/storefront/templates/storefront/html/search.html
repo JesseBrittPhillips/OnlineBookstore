@@ -65,7 +65,7 @@
                 <tr class="clickable-row" data-href="{% url 'book' bid=book.bookid %}">
                     <td><img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:150px;"></td>
                     <td>{{ book.title }}</td>
-    <!--                <td><a href="{% url 'delete' bid=book.bookid %}"><button type="button" class="btn btn-default">Delete</button></a></td>-->
+                    <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add to Cart</button></a></td>
                 </tr>
 
             {% endfor %}
