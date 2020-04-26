@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f525832-93c6-4090-b872-476bf588fc1c" name="Default Changelist" comment="">
+    <list default="true" id="8b6b6af2-be46-4e64-9157-dde9a8e56122" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storefront/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storefront/templates/storefront/html/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/templates/storefront/html/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storefront/templates/storefront/html/mycart.html" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/templates/storefront/html/mycart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storefront/templates/storefront/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/templates/storefront/html/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storefront/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/storefront/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/bookstore/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/bookstore/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +18,10 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
-  <component name="ProjectId" id="1aXvS12dDCA6DtjCps5GKB91QE0" />
+  <component name="ProjectId" id="1auo0IsoZD8MmsxISl8cMesJmgE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -35,74 +31,30 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/storefront/templates/storefront/html" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Cloud(9)\Documents\softEngineering\Django-Bookstore\bookstore\storefront\templates\storefront\html" />
-    </key>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8f525832-93c6-4090-b872-476bf588fc1c" name="Default Changelist" comment="" />
-      <created>1586894748395</created>
+      <changelist id="8b6b6af2-be46-4e64-9157-dde9a8e56122" name="Default Changelist" comment="" />
+      <created>1587594614570</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1586894748395</updated>
+      <updated>1587594614570</updated>
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3821" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586903506838">
-      <screen x="3440" y="0" width="1920" height="1040" />
+    <state x="319" y="232" key="com.intellij.ide.util.TipDialog" timestamp="1587770097833">
+      <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="3821" y="326" key="#com.intellij.fileTypes.FileTypeChooser/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586903506838" />
-    <state x="3475" y="117" key="CommitChangelistDialog2" timestamp="1587605968698">
-      <screen x="3440" y="0" width="1920" height="1040" />
+    <state x="319" y="232" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1587770097833" />
+
+    <state x="-1151" y="513" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587740634128">
+      <screen x="-1920" y="76" width="1920" height="1040" />
     </state>
-    <state x="3475" y="117" key="CommitChangelistDialog2/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1587605968698" />
-    <state x="450" y="505" key="com.intellij.ide.util.TipDialog" timestamp="1587845290212">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="450" y="505" key="com.intellij.ide.util.TipDialog/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1587845290212" />
-    <state x="450" y="505" key="com.intellij.ide.util.TipDialog/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1587100126364" />
-    <state x="3785" y="45" width="1289" height="837" key="dock-window-1" timestamp="1587851778457">
-      <screen x="3440" y="0" width="1920" height="1040" />
-    </state>
-    <state x="3785" y="45" width="1289" height="837" key="dock-window-1/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1587851778457" />
-    <state x="2234" y="173" width="935" height="888" key="dock-window-1/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1587612111766" />
-    <state x="4075" y="46" width="1038" height="1020" key="dock-window-2" timestamp="1586962085136">
-      <screen x="3440" y="0" width="1920" height="1040" />
-    </state>
-    <state x="4075" y="46" width="1038" height="1020" key="dock-window-2/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586962085136" />
-    <state x="798" y="308" width="1046" height="1020" key="dock-window-3" timestamp="1586966393840">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="798" y="308" width="1046" height="1020" key="dock-window-3/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1586966393840" />
-    <state x="3593" y="20" width="1046" height="1020" key="dock-window-3/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586965767683" />
-    <state x="4531" y="216" width="1108" height="1081" key="dock-window-4" timestamp="1586969819911">
-      <screen x="3440" y="0" width="1920" height="1040" />
-    </state>
-    <state x="3743" y="158" width="1108" height="1081" key="dock-window-4/3440.0.1920.1040/0.0.3440.1400@0.0.3440.1400" timestamp="1586969416401" />
-    <state x="4531" y="216" width="1108" height="1081" key="dock-window-4/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586969819911" />
-    <state x="2441" y="25" width="886" height="1027" key="dock-window-5" timestamp="1586980950883">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="2441" y="25" width="886" height="1027" key="dock-window-5/3440.0.1920.1040/0.0.3440.1400@3440.0.1920.1040" timestamp="1586980950883" />
+    <state x="-1151" y="513" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/-1920.76.1920.1040@-1920.76.1920.1040" timestamp="1587740634128" />
   </component>
 </project>
