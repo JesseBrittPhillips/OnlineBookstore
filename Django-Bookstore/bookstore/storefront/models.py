@@ -253,4 +253,3 @@ class ShoppingCart(models.Model):
     class Meta:
         managed = False
         db_table = 'shopping cart'
-

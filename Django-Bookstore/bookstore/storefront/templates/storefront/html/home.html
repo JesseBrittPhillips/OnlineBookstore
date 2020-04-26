@@ -11,16 +11,15 @@
     <title></title>
     <script></script>
 </head>
-<body>
-    <nav class="nav navbar-default">
+<body style="background-color: #F5FFFA">
+    <nav class="nav navbar-inverse" style="background-color: #2F4F4F">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="" class="navbar-brand">BOOKSTORE TITLE</a>
+                <a href="" class="navbar-brand">Flip The Page</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../search"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
+                <li><a href="search.html"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
                 <li><a href="../mycart"> MY CART</a></li>
-
                 {% if x %}
                     <li><a href="../logout">LOGOUT</a></li>
                     <li><a href="../profile">View Profile</a></li>
@@ -72,13 +71,14 @@
     </div>
 
     <div class="container">
-        <h1>TOP SELLING BOOKS</h1>
+        <h1 style="text-align:center; color: #2F4F4F">TOP SELLING BOOKS</h1>
         <div class="row">
             {% for book in books %}
                 <div class="col-sm-3">
-                    <div class="card">
-                        <div class="card-body"><a href="{% url 'book' bid=book.bookid %}">
+                    <div class="card" style="width: 18rem">
+                        <div class="card-body" alt="Card image cap"><a href="{% url 'book' bid=book.bookid %}" style="color: #2F4F4F">
                             <img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:100%;">
+                            <h3 class="card-title" style="text-align:center">{{book.title}}</h3>
                             </a>
                         </div>
                     </div>

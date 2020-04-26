@@ -16,9 +16,9 @@
         });
     </script>
 </head>
-<body>
-    <nav class="nav navbar-default">
-        <div class="container-fluid">
+<body style="background-color: #F5FFFA">
+    <nav class="nav navbar-inverse" style="background-color: #2F4F4F">
+            <div class="container-fluid">
             <div class="navbar-header">
                 <a href="" class="navbar-brand">BOOKSTORE TITLE</a>
             </div>
@@ -37,7 +37,6 @@
             </ul>
         </div>
     </nav>
-
     <form method="get" action="{% url 'search' %}" class="form-inline">
         {% csrf_token %}
         <div>

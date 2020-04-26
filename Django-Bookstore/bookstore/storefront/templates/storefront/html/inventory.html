@@ -9,12 +9,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title></title>
     <script></script>
+    <style>
+        table {
+            width: 100%;
+            text-align:center;
+            font-size: 200%;
+            text_color: #2F4F4F;
+        }
+
+        th {
+            text_color: #2F4F4F;
+            text-align:center;
+        }
+
+        td {
+            vertical-align:top;
+        }
+    </style>
 </head>
-<body>
-    <nav class="nav navbar-default">
+<body style="background-color: #F5FFFA">
+    <nav class="nav navbar-inverse" style="background-color: #2F4F4F">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="../home" class="navbar-brand">BOOKSTORE TITLE</a>
+                <a href="../home" class="navbar-brand">Flip The Page</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="../logout">LOGOUT</a></li>
@@ -23,6 +40,7 @@
         </div>
     </nav>
 
+    <br>
     <div>
         <table>
             <tr>
@@ -30,11 +48,12 @@
                 <th>Image</th>
                 <th>Delete Book</th>
             </tr>
+            <br>
             {% for book in booklist %}
                 <tr>
                     <td>{{ book.title }}</td>
                     <td><img src="{{book.pic.url}}" alt="Coffee" style="width:100px;"></td>
-                    <td><a href="{% url 'delete' bid=book.bookid %}"><button type="button" class="btn btn-default">Delete</button></a></td>
+                    <td><a href="{% url 'delete' bid=book.bookid %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Delete</button></a></td>
                 </tr>
             {% endfor %}
         </table>
