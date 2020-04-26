@@ -128,6 +128,18 @@ def customer_reg_complete_view(request):
     context = {}
     return render(request, "storefront/html/registrationComplete.html", context)
 
+def search(request):
+    search_term = request.GET.get('search')
+    if search_term:
+        books = Inventory.objects.filter(title__icontains=search_term)
+    else:
+        books = Inventory.objects.all()
+
+    context = {
+        'books' : books
+    }
+    return render(request, "storefront/html/search.html", context)
+
 def customer_login_view(request):
     x = 0
     y = ""

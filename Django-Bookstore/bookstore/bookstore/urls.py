@@ -52,6 +52,7 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='storefront/html/password_reset_complete.html'), name='password_reset_complete'),
     path('delete/<slug:bid>/', delete, name='delete'),
     path('book/<slug:bid>/', book, name='book'),
+    path('search/', search, name='search'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
