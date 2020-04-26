@@ -59,18 +59,26 @@
     </form>
 
     {% if books %}
-        <table>
+        <table class="table table-hover">
+            <thead>
+                <th></th>
+                <th>Title</th>
+                <th>Price</th>
+                <th></th>
+            </thead>
+            <tbody>
             {% for book in books %}
                 <tr class="clickable-row" data-href="{% url 'book' bid=book.bookid %}">
                     <td><img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:150px;"></td>
                     <td>{{ book.title }}</td>
+                    <td>${{ book.sell_price }}</td>
                     <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add to Cart</button></a></td>
                 </tr>
-
             {% endfor %}
+            </tbody>
         </table>
     {% else %}
-        <p>Book Not Found</p>
+        <p style="text-align: center;">Book Not Found</p>
     {% endif %}
 
 <!--    <div class="container">-->

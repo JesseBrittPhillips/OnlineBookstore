@@ -94,7 +94,7 @@ def activate(request, uidb64, token):
 
 def register(request):
     x = ""
-    form = CustomerRegForm(request.POST)
+    form = CustomerRegForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             user = form.save(commit=False)
@@ -305,6 +305,10 @@ def cartview(request):
 
 def checkout(request):
     cartuser = request.user
+    cartlist = ShoppingCart.objects.filter(custid=cartuser.id)
+    for cart in cartlist:
+        booklist = Inventory.objects.filter(bookid=cart.invid)
+
     form = Checkout(request.POST, instance=request.user)
     if request.method == 'POST':
         if form.is_valid():
@@ -313,6 +317,8 @@ def checkout(request):
             current_site = get_current_site(request)
             mail_subject = 'Bookstore Order'
             message = render_to_string('order_email.html', {
+                'cartlist': cartlist,
+                'booklist': booklist,
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),

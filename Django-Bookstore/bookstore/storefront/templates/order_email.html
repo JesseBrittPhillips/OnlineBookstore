@@ -1,5 +1,12 @@
 {% autoescape off %}
-Hi {{ user.username }},
+Hi {{ user.first_name }} {{ user.last_name }},
 Thank you for purchasing from our bookstore!
 Your order includes:
+    {% for book in booklist %}
+    {{ book.title }}
+    {% endfor %}
+Shipping to:
+{{ user.address }}
+Payment Type:
+{{ user.card_type }}
 {% endautoescape %}

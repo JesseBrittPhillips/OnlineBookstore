@@ -94,7 +94,7 @@ class CustomerEdit(UserChangeForm):
     address = forms.CharField(label='Address', max_length=75, required=False)
     state = forms.CharField(label='State', max_length=75, required=False)
     city = forms.CharField(label='City', max_length=75, required=False)
-    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)], required = False)
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)], required=False)
     card_type = forms.CharField(label='Card Type', max_length=75, required=False)
     card_number = forms.CharField(label='Card Number', max_length=75, required=False)
     promotions = forms.BooleanField(label='promotions', required=False)
