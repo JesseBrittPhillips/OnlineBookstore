@@ -60,7 +60,9 @@ urlpatterns = [
 
     path('search', search),
     path('addtocart/<slug:bid>/', addtocart, name='addtocart'),
+    path('removefromcart/<slug:bid>/', removefromcart, name='removefromcart'),
     path('checkout/', checkout, name='checkout'),
+    path('mycart/', cartview, name='mycart'),
     path('checkout/order_confirm/', order_confirm, name='order_confirm'),
 
     path('login/forgot', forgot_view),

@@ -13,6 +13,7 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from decimal import *
 
 User = get_user_model()
 
@@ -269,7 +270,36 @@ def addtocart(request, bid):
     except:
         cart = ShoppingCart.objects.create(custid=cartuser.id, invid=inv.bookid, quantity = 1)
     cart.save()
-    return redirect('/search')
+    return redirect('mycart')
+
+def removefromcart(request, bid):
+    cartuser = request.user
+    inv = Inventory.objects.get(pk=bid)
+
+    cart = ShoppingCart.objects.get(custid=cartuser.id, invid=inv.bookid)
+    cart.quantity -= 1
+    if(cart.quantity == 0):
+        cart.delete()
+    else:
+        cart.save()
+    return redirect('mycart')
+
+def cartview(request):
+    cartuser = request.user
+    cartlist = ShoppingCart.objects.filter(custid = cartuser.id)
+    total = Decimal(0.00)
+    booklist = Inventory.objects.all()
+    for cart in cartlist:
+        for book in booklist:
+            if cart.invid == book.bookid:
+                total = (cart.quantity * book.buyprice) + total
+
+    context = {
+        'total' : total,
+        'cartlist' : cartlist,
+        'booklist' : booklist
+    }
+    return render(request, "storefront/html/mycart.html", context)
 
 def checkout(request):
     form = Checkout(request.POST, instance=request.user)

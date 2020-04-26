@@ -1,69 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
 
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../css/TermProject.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'storefront/css/TermProject.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title></title>
     <script></script>
 </head>
-
 <body>
-  <nav class="nav navbar-default">
+    <nav class="nav navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="home.html" class="navbar-brand">BOOKSTORE TITLE</a>
+                <a href="../" class="navbar-brand">BOOKSTORE TITLE</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="search.html"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="home.html">LOGOUT</a></li>
-                <li><a href="mycart.html">MY CART</a></li>
+                <li><a href="../search"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
+                {% if user.isauthenticated %}
+                    <li><a href="../logout">LOGOUT</a></li>
+                    <li><a href="../profile">View Profile</a></li>
+                {% else %}
+                    <li><a href="../login">LOGIN</a></li>
+                {% endif %}
+
+                {%if user.is_staff%}
+                    <li><a href="../admin">Admin</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
-    <section class="confirmation">
-        <div class="container">
-            <div class="summary">
-        
-                    <h1>
-                       My Cart
-                    </h1>
-              <h2> Lord of The Rings</h2>
-                 <div class="col-sm-5">
-                  <div class="card">
-                    <div class="card-body">
-                        <img src="../images/LoR.jpg" alt="Coffee" style="width:100%;">
-                    </div>
-                </div>
-                </div>
-                            <div class="card text-white bg-secondary mb-3">
 
-                                <div class="card-body">
-                                    <h1 class="card-title">1</h1>
-                                  
-                                    <div>
-                                        <button type="button" >Add </button>
-                                               <button type="button" >Remove </button>
+    <div>
+        <table>
+            <tr>
+                <th>Book Title</th>
+                <th>Cover Picture</th>
+                <th>Quantity</th>
+                <th>Add 1</th>
+                <th>Remove 1</th>
+            </tr>
+            {% for cart in cartlist %}
+                {%for book in booklist%}
+                    {%if cart.invid == book.bookid%}
+                        <tr>
+                            <td>{{ book.title }}</td>
+                            <td><img src="{{book.pic.url}}" alt="Coffee" style="width:100px;"></td>
+                            <td>{{ cart.quantity }}</td>
+                            <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add 1 to Cart</button></a></td>
+                            <td><a href="{% url 'removefromcart' bid=book.bookid %}"><button type="button" class="btn btn-default">Remove 1 From Cart</button></a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </table>
+    </div>
 
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <h4 class="card-text">$20.00</h4>
+    <div>
+        Total is {{total}}
+    </div>
 
-                                </div>  
-
-                        <h1>Total: $20</h1>
-                    </div>
-                    <div class="col-md-3">
-                        <button><a href="checkout.html"> Continue to Checkout</a></button>
-
-            </div>
-        </div>
-        </div>
-    </section>
-    
 </body>
 </html>

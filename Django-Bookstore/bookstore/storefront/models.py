@@ -189,7 +189,6 @@ class Inventory(models.Model):
     bookid = models.AutoField(primary_key=True)
     title = models.CharField(max_length=45, blank=True, null=True)
     authors = models.CharField(max_length=45, blank=True, null=True)
-    # coverpicid = models.ForeignKey(Coverpictures, models.DO_NOTHING, db_column='coverPicID', blank=True, null=True)  # Field name made lowercase.
     buyprice = models.DecimalField(db_column='BuyPrice', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
     sell_price = models.DecimalField(db_column='Sell Price', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     minumum = models.IntegerField(blank=True, null=True)
