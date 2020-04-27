@@ -14,6 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from decimal import *
+import datetime
 
 User = get_user_model()
 
@@ -295,14 +296,74 @@ def cartview(request):
     }
     return render(request, "storefront/html/mycart.html", context)
 
+def addpromo(request):
+    try:
+        order = Orders.objects.get(custid = request.user.id)
+        order.ordertime = datetime.datetime.now()
+
+    except:
+        order = Orders.objects.create(custid = request.user.id, ordertime = datetime.datetime.now())
+
+    form = orderForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            orderform = form.save(commit=False)
+            for promo in Promotions.objects.all():
+                if promo.promocode == orderform.promotion:
+                    order.promotion = orderform.promotion
+                    order.save()
+            return redirect('checkout')
+
+    context = {
+        'form' :form
+    }
+    return render(request, "storefront/html/addpromo.html", context)
+
+
+
+
 def checkout(request):
     x = 0
     if request.user.is_authenticated:
         x = 1
+
     cartuser = request.user
     cartlist = ShoppingCart.objects.filter(custid=cartuser.id)
     for cart in cartlist:
         booklist = Inventory.objects.filter(bookid=cart.invid)
+
+    #########################Getting the correct order object#################
+    try:
+        order = Orders.objects.get(custid = request.user.id)
+        order.ordertime = datetime.datetime.now()
+
+    except:
+        order = Orders.objects.create(custid = request.user.id, ordertime = datetime.datetime.now())
+
+    #################################getting the correct cart total##########################
+    total = Decimal(0.00)
+    cartlist = ShoppingCart.objects.filter(custid=cartuser.id)
+    booklist = Inventory.objects.all()
+    for cart in cartlist:
+        for book in booklist:
+            if cart.invid == book.bookid:
+                total = (cart.quantity * book.buyprice) + total
+
+    ########################getting the promotion from the order
+    promotion = Decimal(100)######set to 100 for the case it doesnt exist
+    if order.promotion:
+        for promo in Promotions.objects.all():
+            if promo.promocode == order.promotion:
+                promotion = Decimal(promo.percentage)
+
+
+    total = total*(promotion/100)
+
+    order.orderdate = datetime.date.today()
+    order.orderstatus = "in progress"
+    order.totalprice = total
+    total = order.totalprice
+    order.save()
 
     form = Checkout(request.POST, instance=request.user)
     if request.method == 'POST':
@@ -328,13 +389,43 @@ def checkout(request):
     else:
         form = Checkout(instance=request.user)
     context = {
+        'total' : total,
+        'x' : x,
         'form': form,
         'user': request.user
     }
     return render(request, "storefront/html/checkout.html", context)
 
 def order_confirm(request):
-    context = {}
+    try:
+        order = Orders.objects.get(custid = request.user.id)
+        order.ordertime = datetime.datetime.now()
+
+    except:
+        raise Http404
+
+    books = ""
+    cartlist = ShoppingCart.objects.filter(custid=request.user.id)
+    booklist = Inventory.objects.all()
+    for cart in cartlist:
+        for book in booklist:
+            if cart.invid == book.bookid:
+                books += book.title + "(x" + str(cart.quantity) + "), "
+    order.books = books
+    address = ""
+    address += request.user.address + ", "
+    address += request.user.city + ", "
+    address += request.user.state + ", "
+    address += request.user.zip_code + ", "
+
+    order.shipaddress = address
+
+    order.paymentmethod = request.user.card_type
+    order.orderstatus = "order confirmed"
+    order.save()
+    context = {
+        'order' : order,
+    }
     return render(request, "storefront/html/orderconfirm.html", context)
 
 

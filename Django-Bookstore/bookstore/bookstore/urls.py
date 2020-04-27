@@ -63,6 +63,7 @@ urlpatterns = [
     path('checkout/', checkout, name='checkout'),
     path('mycart/', cartview, name='mycart'),
     path('checkout/order_confirm/', order_confirm, name='order_confirm'),
+    path('checkout/promo', addpromo, name='addpromo'),
 
     path('login/forgot', forgot_view),
 

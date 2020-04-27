@@ -9,6 +9,17 @@ User = get_user_model()
 
 
 
+class orderForm(forms.ModelForm):
+    class Meta:
+        model = Orders
+        fields = (
+            'promotion',
+        )
+        exclude = (
+            'ordertime',
+        )
+
+
 class InventoryForm(forms.ModelForm):
 
     class Meta:
