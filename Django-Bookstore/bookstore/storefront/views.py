@@ -255,9 +255,11 @@ def addtocart(request, bid):
 
     try:
         cart = ShoppingCart.objects.get(custid=cartuser.id, invid=inv.bookid)
-        cart.quantity += 1
+        if cart.quantity < inv.number_of_copies:
+            cart.quantity += 1
     except:
         cart = ShoppingCart.objects.create(custid=cartuser.id, invid=inv.bookid, quantity = 1)
+
     cart.save()
     return redirect('mycart')
 
