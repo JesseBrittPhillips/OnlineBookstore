@@ -55,8 +55,12 @@
     </div>
 
     <div align="middle">
-        <h3>Total is ${{total}}</h3>
-        <a href="{% url 'checkout' %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Checkout</button></a>
+        {% if total %}
+            <h3>Total is ${{total}}</h3>
+            <a href="{% url 'checkout' %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Checkout</button></a>
+        {% else %}
+            <p>Cart is Empty</p>
+        {% endif %}
     </div>
 
 </body>

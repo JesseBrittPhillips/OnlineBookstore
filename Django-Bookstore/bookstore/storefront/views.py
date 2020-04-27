@@ -286,7 +286,7 @@ def cartview(request):
     for cart in cartlist:
         for book in booklist:
             if cart.invid == book.bookid:
-                total = (cart.quantity * book.buyprice) + total
+                total = (cart.quantity * book.sell_price) + total
 
     context = {
         'x' : x,
@@ -320,8 +320,6 @@ def addpromo(request):
     return render(request, "storefront/html/addpromo.html", context)
 
 
-
-
 def checkout(request):
     x = 0
     if request.user.is_authenticated:
@@ -350,7 +348,7 @@ def checkout(request):
     for cart in cartlist:
         for book in booklist:
             if cart.invid == book.bookid:
-                total = (cart.quantity * book.buyprice) + total
+                total = (cart.quantity * book.sell_price) + total
 
     ########################getting the promotion from the order
     promotion = Decimal(100)######set to 100 for the case it doesnt exist
@@ -427,9 +425,11 @@ def order_confirm(request):
 
     order.paymentmethod = request.user.card_type
     order.orderstatus = "order confirmed"
+    order.custid += 5000
     order.save()
-    cartlist = ShoppingCart.objects.get(custid=request.user.id)
-    cartlist.delete()
+    for cart in cartlist:
+        cart.delete()
+
     context = {
         'order' : order,
     }
