@@ -29,10 +29,11 @@
             </ul>
         </div>
     </nav>
+    <br>
     <form method = "post" enctype="multipart/form-data" id ="inventoryAddBook">
         {% csrf_token %}
         {{ form.as_p}}
-        <a href="{% url 'checkout' %}"><button type="submit" class="btn btn-default">Add Promo</button></a>
+        <a href="{% url 'checkout' %}"><button type="submit" class="btn btn-default" style="border: 2px solid #2F4F4F">Add Promo</button></a>
     </form>
 
 </body>
