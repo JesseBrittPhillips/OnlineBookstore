@@ -391,6 +391,7 @@ def checkout(request):
     order.orderstatus = "in progress"
     order.totalprice = total
     total = order.totalprice
+    total = format(total, '.2f')
     order.save()
 
     form = Checkout(request.POST, instance=request.user)

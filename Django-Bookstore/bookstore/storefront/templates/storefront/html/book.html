@@ -41,9 +41,10 @@
                 </div>
 
             <h1>{{ book.title }}</h1>
-            <h2>{{ book.authors }}</h2>
-            <h2>{{ book.publisher }}</h2>
-            <h2{{ book.editor }}</p>
+            <h2>Author: {{ book.authors }}</h2>
+            <h2>Publisher: {{ book.publisher }}</h2>
+            <h2>Editor: {{ book.editor }}</h2>
+            <h2>Number of Copies: {{ book.number_of_copies }}</h2>
             <h2>${{ book.sell_price }}</h2>
         <a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Add to Cart</button></a>
     </div>
