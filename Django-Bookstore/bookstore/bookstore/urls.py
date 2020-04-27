@@ -68,7 +68,7 @@ urlpatterns = [
     path('login/forgot', forgot_view),
 
     path('home/', home_view),
-    path('', home_view),
+    path('', home_view, name='home'),
 
     path('admin/', admin.site.urls),
     # path('loggedin/', loggedin_view),

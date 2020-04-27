@@ -14,7 +14,7 @@
     <nav class="nav navbar-inverse" style="background-color: #2F4F4F">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="" class="navbar-brand">Flip The Page</a>
+                <a href="{% url 'home' %}" class="navbar-brand">Flip The Page</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url 'search' %}"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
@@ -32,7 +32,10 @@
     <div id="book" class="container">
         <div>
             <p>{{ book.title }}</p>
-            <p>${{ book.buyprice }}</p>
+            <p>{{ book.authors }}</p>
+            <p>{{ book.publisher }}</p>
+            <p>{{ book.editor }}</p>
+            <p>${{ book.sell_price }}</p>
         </div>
         <div>
             <img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:40%;">
