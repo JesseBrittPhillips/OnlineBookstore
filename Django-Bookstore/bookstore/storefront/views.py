@@ -441,6 +441,7 @@ def order_confirm(request):
     for cart in cartlist:
         book = Inventory.objects.get(bookid=cart.invid)
         book.number_of_copies -= cart.quantity
+        book.save()
         cart.delete()
 
     context = {
