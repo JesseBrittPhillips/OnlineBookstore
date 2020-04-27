@@ -8,8 +8,20 @@ from django.core.validators import MaxValueValidator
 User = get_user_model()
 
 
+
+class orderForm(forms.ModelForm):
+    class Meta:
+        model = Orders
+        fields = (
+            'promotion',
+        )
+        exclude = (
+            'ordertime',
+        )
+
+
 class InventoryForm(forms.ModelForm):
-    
+
     class Meta:
         model = Inventory
         fields = (
@@ -27,26 +39,6 @@ class InventoryForm(forms.ModelForm):
             'datepublished',
             'pic'
         )
-
-    def save(self, commit=True):
-        book = super(InventoryForm, self).save(commit=False)
-        book.title = self.cleaned_data['title']
-        book.authors = self.cleaned_data['authors']
-        book.buyprice = self.cleaned_data['buyprice']
-        book.sell_price = self.cleaned_data['sell_price']
-        book.minumum = self.cleaned_data['minumum']
-        book.category = self.cleaned_data['category']
-        book.number_of_copies = self.cleaned_data['number_of_copies']
-        book.publisher = self.cleaned_data['publisher']
-        book.editor = self.cleaned_data['editor']
-        book.isbn = self.cleaned_data['isbn']
-        book.datepublished = self.cleaned_data['datepublished']
-        book.pic = self.cleaned_data['pic']
-
-        if commit:
-            book.save()
-
-        return book
 
 class CheckEmailForm(forms.ModelForm):
     class Meta:
@@ -107,12 +99,13 @@ class CustomerRegForm(UserCreationForm):
 
         return user
 
+
 class CustomerEdit(UserChangeForm):
     phone = forms.CharField(label='Phone Number', max_length=75)
     address = forms.CharField(label='Address', max_length=75, required=False)
     state = forms.CharField(label='State', max_length=75, required=False)
     city = forms.CharField(label='City', max_length=75, required=False)
-    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)], required = False)
+    zip_code = forms.IntegerField(label='Zip Code', validators=[MaxValueValidator(99999)], required=False)
     card_type = forms.CharField(label='Card Type', max_length=75, required=False)
     card_number = forms.CharField(label='Card Number', max_length=75, required=False)
     promotions = forms.BooleanField(label='promotions', required=False)
@@ -177,36 +170,3 @@ class Checkout(UserChangeForm):
             'phone'
         )
 
-class BookEdit(forms.ModelForm):
-    bookid = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=45, blank=True, null=True)
-    authors = models.CharField(max_length=45, blank=True, null=True)
-    buyprice = models.DecimalField(db_column='BuyPrice', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    sell_price = models.DecimalField(db_column='Sell Price', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    minumum = models.IntegerField(blank=True, null=True)
-    category = models.CharField(max_length=45, blank=True, null=True)
-    number_of_copies = models.IntegerField(db_column='number of copies', blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    publisher = models.CharField(max_length=45, blank=True, null=True)
-    editor = models.CharField(max_length=45, blank=True, null=True)
-    isbn = models.CharField(db_column='ISBN', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    datepublished = models.TextField(blank=True, null=True)  # This field type is a guess.
-    pic = models.ImageField(upload_to='images/', blank=True)
-
-
-    class Meta:
-        model = Inventory
-        fields = (
-            'bookid',
-            'title',
-            'authors',
-            'buyprice',
-            'sell_price',
-            'minumum',
-            'category',
-            'number_of_copies',
-            'publisher',
-            'editor',
-            'isbn',
-            'datepublished',
-            'pic'
-        )

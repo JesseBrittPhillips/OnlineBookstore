@@ -11,30 +11,25 @@
     <title></title>
     <script></script>
 </head>
-<body>
-    <nav class="nav navbar-default">
+<body style="background-color: #F5FFFA">
+    <nav class="nav navbar-inverse" style="background-color: #2F4F4F;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="" class="navbar-brand">BOOKSTORE TITLE</a>
+                <a href="{% url 'home' %}" class="navbar-brand">Flip The Page</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../search"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="../mycart"> MY CART</a></li>
-
+                <li><a href="{% url 'search' %}"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
+                <li><a href="{% url 'mycart' %}"> MY CART</a></li>
                 {% if x %}
-                    <li><a href="../logout">LOGOUT</a></li>
-                    <li><a href="../profile">View Profile</a></li>
+                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    <li><a href="{% url 'view_profile' %}">VIEW PROFILE</a></li>
                 {% else %}
-                    <li><a href="../login">LOGIN</a></li>
-                {% endif %}
-
-                {%if user.is_staff%}
-                    <li><a href="../admin">Admin</a></li>
+                    <li><a href="{% url 'login' %}">LOGIN</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
-    
+
     <div class="container">
         <div id="myCarousel" class="carousel slide container" data-ride="carousel">
             <!-- Indicators -->
@@ -71,20 +66,25 @@
       </div>
     </div>
 
-    <div class="container">
-        <h1>TOP SELLING BOOKS</h1>
-        <div class="row">
+    <div style="margin-top: 30px; overflow-x:auto;" class="container">
+        <h1 style="text-align:center; color: #2F4F4F">NEW BOOKS</h1>
+        <table class="table table-hover">
+        <div class="clickable-row">
             {% for book in books %}
                 <div class="col-sm-3">
-                    <div class="card">
-                        <div class="card-body"><a href="{% url 'book' bid=book.bookid %}">
+                    <div class="card" style="overflow-x:auto;">
+                        <div class="card-body" alt="Card image cap"><a href="{% url 'book' bid=book.bookid %}" style="color: #2F4F4F">
                             <img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:100%;">
+                            <h3 class="card-title" style="text-align:center">{{book.title}}</h3>
                             </a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
+        </table>
     </div>
+
+</div>
 </body>
 </html>

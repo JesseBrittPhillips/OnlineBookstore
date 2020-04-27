@@ -12,49 +12,60 @@
     <style></style>
 </head>
 
-<body>
-  <nav class="nav navbar-default">
+<body style="background-color: #F5FFFA">
+    <nav class="nav navbar-inverse" style="background-color: #2F4F4F">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="home.html" class="navbar-brand">BOOKSTORE TITLE</a>
+                <a href="{% url 'home' %}" class="navbar-brand">Flip The Page</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="search.html"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="home.html">LOGOUT</a></li>
-                <li><a href="mycart.html">MY CART</a></li>
+                <li><a href="{% url 'search' %}"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
+                <li><a href="{% url 'mycart' %}"> MY CART</a></li>
+                {% if not x %}
+                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    <li><a href="{% url 'view_profile' %}">VIEW PROFILE</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">LOGIN</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
     <section class="confirmation">
         <div class="container">
-            <div class="summary">
-        
-                    <h1>
-                 Your Order Has Been Processed
-                    </h1>
-                   <div class="col-sm-5">
-                  <div class="card">
-                    <div class="card-body">
-                        <img src="../images/LoR.jpg" alt="Coffee" style="width:100%;">
-                    </div>
-                </div>
-                </div>
-              <h2> Lord of The Rings</h2>
-                            <div class="card text-white bg-secondary mb-3">
-
-                                <div class="card-body">
-                                    <h1 class="card-title">1</h1>
-                                </div>
-                        <h1>Total: $20</h1>
-                    </div>
-        </div>
-                <div>
-    <h3>Order Number: 123456</h3></div>
-        </div>
-        <div class="col-md-3">
-                        <button><a href="return.html"> Return </a></button>
-
+            <div>
+                <p style="font-size: xx-large; text-align: center;">ORDER CONFIRMATION</p>
             </div>
+            <div class="summary">
+                <table>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Order Date</th>
+                        <th>Order Time</th>
+                        <th>Order Status</th>
+                        <th>Order Total</th>
+                        <th>Ordered Items</th>
+                        <th>Shipping Info</th>
+                        <th>Card Type</th>
+                        <th>Promotions Used</th>
+                    </tr>
+                    <tr>
+                        <td>{{order.orderid}}</td>
+                        <td>{{request.user.first_name}}</td>
+                        <td>{{request.user.last_name}}</td>
+                        <td>{{order.orderdate}}</td>
+                        <td>{{order.ordertime}}</td>
+                        <td>{{order.orderstatus}}</td>
+                        <td>{{order.totalprice}}</td>
+                        <td>{{order.books}}</td>
+                        <td>{{order.shipaddress}}</td>
+                        <td>{{order.paymentmethod}}</td>
+                        <td>{{order.promotion}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </section>
     
 </body>

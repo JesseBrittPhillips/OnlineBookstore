@@ -1,5 +1,20 @@
 {% autoescape off %}
-Hi {{ user.username }},
+Hi {{ user.first_name }} {{ user.last_name }},
 Thank you for purchasing from our bookstore!
-Your order includes:
+Order ID:
+    {{ order.orderid }}
+Order Date:
+    {{ order.orderdate }}
+Order Time:
+    {{order.ordertime}}
+Order Status:
+    {{order.orderstatus}}
+Order Total:
+    {{order.totalprice}}
+Books Ordered:
+    {{books}}
+Shipping to:
+    {{ user.address }}
+Payment Type:
+    {{ user.card_type }}
 {% endautoescape %}

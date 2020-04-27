@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,28 +10,25 @@
     <title></title>
     <script></script>
 </head>
-<body>
-    <nav class="nav navbar-default">
+
+<body style="background-color: #F5FFFA">
+    <nav class="nav navbar-inverse" style="background-color: #2F4F4F">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="../" class="navbar-brand">BOOKSTORE TITLE</a>
+                <a href="{% url 'home' %}" class="navbar-brand">Flip The Page</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../search"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                {% if user.isauthenticated %}
-                    <li><a href="../logout">LOGOUT</a></li>
-                    <li><a href="../profile">View Profile</a></li>
+                <li><a href="{% url 'search' %}"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
+                <li><a href="{% url 'mycart' %}"> MY CART</a></li>
+                {% if x %}
+                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    <li><a href="{% url 'view_profile' %}">VIEW PROFILE</a></li>
                 {% else %}
-                    <li><a href="../login">LOGIN</a></li>
-                {% endif %}
-
-                {%if user.is_staff%}
-                    <li><a href="../admin">Admin</a></li>
+                    <li><a href="{% url 'login' %}">LOGIN</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
-
     <div>
         <table>
             <tr>
@@ -49,12 +45,8 @@
                             <td>{{ book.title }}</td>
                             <td><img src="{{book.pic.url}}" alt="Coffee" style="width:100px;"></td>
                             <td>{{ cart.quantity }}</td>
-                            {%if cart.quantity == book.number_of_copies%}
-                            <td>No More in Stock</td>
-                            {%else%}
-                            <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add 1 to Cart</button></a></td>
-                            {%endif%}
-                            <td><a href="{% url 'removefromcart' bid=book.bookid %}"><button type="button" class="btn btn-default">Remove 1 From Cart</button></a></td>
+                            <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Add 1 to Cart</button></a></td>
+                            <td><a href="{% url 'removefromcart' bid=book.bookid %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Remove 1 From Cart</button></a></td>
                         </tr>
                     {% endif %}
                 {% endfor %}
@@ -62,8 +54,13 @@
         </table>
     </div>
 
-    <div>
-        Total is {{total}}
+    <div align="middle">
+        {% if total %}
+            <h3>Total is ${{total}}</h3>
+            <a href="{% url 'checkout' %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Checkout</button></a>
+        {% else %}
+            <p>Cart is Empty</p>
+        {% endif %}
     </div>
 
 </body>
