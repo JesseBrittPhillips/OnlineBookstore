@@ -45,7 +45,11 @@
                             <td>{{ book.title }}</td>
                             <td><img src="{{book.pic.url}}" alt="Coffee" style="width:100px;"></td>
                             <td>{{ cart.quantity }}</td>
+                            {%if cart.quantity == book.number_of_copies%}
+                            <td>No More in Stock</td>
+                            {%else%}
                             <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add 1 to Cart</button></a></td>
+                            {%endif%}
                             <td><a href="{% url 'removefromcart' bid=book.bookid %}"><button type="button" class="btn btn-default">Remove 1 From Cart</button></a></td>
                         </tr>
                     {% endif %}

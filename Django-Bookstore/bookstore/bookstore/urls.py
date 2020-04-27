@@ -58,6 +58,7 @@ urlpatterns = [
     path('profile/edit', edit_profile, name='edit_profile'),
     path('profile/changepassword', changepassword, name='changepassword'),
 
+    path('toomanybooks/', toomanybooks, name = 'toomanybooks'),
     path('addtocart/<slug:bid>/', addtocart, name='addtocart'),
     path('removefromcart/<slug:bid>/', removefromcart, name='removefromcart'),
     path('checkout/', checkout, name='checkout'),

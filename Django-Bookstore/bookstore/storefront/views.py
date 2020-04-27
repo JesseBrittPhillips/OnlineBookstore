@@ -273,8 +273,12 @@ def removefromcart(request, bid):
         cart.save()
     return redirect('mycart')
 
+def toomanybooks(request):
+    return render(request, "storefront/html/toomanybooks.html")
+
 def cartview(request):
     x = 0
+    y = 0
     if request.user.is_authenticated:
         x = 1
     else:
@@ -286,10 +290,20 @@ def cartview(request):
     for cart in cartlist:
         for book in booklist:
             if cart.invid == book.bookid:
+                if cart.quantity==book.number_of_copies:
+                    y=1
+                if cart.quantity>book.number_of_copies:
+                    cart.quantity = book.number_of_copies
+                    if cart.quantity == 0:
+                        cart.delete()
+                    cart.save()
+                    return redirect('toomanybooks')
+
                 total = (cart.quantity * book.sell_price) + total
 
     context = {
         'x' : x,
+        'y': y,
         'total' : total,
         'cartlist' : cartlist,
         'booklist' : booklist
@@ -428,6 +442,8 @@ def order_confirm(request):
     order.custid += 5000
     order.save()
     for cart in cartlist:
+        book = Inventory.objects.get(bookid = cart.invid)
+        book.number_of_copies -= cart.quantity
         cart.delete()
 
     context = {
