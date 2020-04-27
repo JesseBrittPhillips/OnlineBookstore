@@ -10,15 +10,6 @@ form p {
   font-size: xx-large;
 }
 
-#inventoryAddBook p{
-  font-size: medium;
-  font-color: #2F4F4F;
-}
-
-#id_pic {
-    float: center;
-}
-
 form div {
   margin: 0px 0px 30px 0px;
 }
@@ -33,32 +24,4 @@ form div {
 
 .book div {
     display: inline-block;
-}
-
-table {
-    width: 90%;
-    text-align:center;
-    font-size: 200%;
-    text_color: #2F4F4F;
-    margin: 20px;
-}
-
-#book p{
- font-size: medium;
-  font-color: #2F4F4F;
-}
-
-table th {
-    text_color: #2F4F4F;
-    text-align: center;
-}
-
-td {
-    height: 300px;
-    vertical-align: middle;
-    text-align: center;
-}
-
-li {
-    list-style-type: none;
 }

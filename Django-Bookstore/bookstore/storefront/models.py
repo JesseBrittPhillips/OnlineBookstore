@@ -3,6 +3,7 @@ from encrypted_model_fields.fields import EncryptedCharField
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.models import PermissionsMixin
+
 import json
 
 
@@ -43,7 +44,7 @@ class AuthUser(models.Model):
     city = models.CharField(db_column='city', max_length=45, blank=True, null=True)  # Field name made lowercase.
     state = models.CharField(db_column='State', max_length=45, blank=True, null=True)  # Field name made lowercase.
     zip_code = models.CharField(db_column='zipcode', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    promotions = models.IntegerField(default=False, blank=False, null=False)
+    promotions = models.IntegerField(blank=True, null=True)
     cart_id = models.ForeignKey('ShoppingCart', models.DO_NOTHING, db_column='cart_id', blank=True, null=True)  # Field name made lowercase.
     card_type = models.CharField(db_column='card_type', max_length=45, blank=True, null=True)  # Field name made lowercase.
     card_number = EncryptedCharField(max_length=100)  # Field name made lowercase.
@@ -86,6 +87,7 @@ class AuthUserUserPermissions(models.Model):
 class Coverpictures(models.Model):
     picid = models.AutoField(db_column='PicID', primary_key=True)  # Field name made lowercase.
     picture = models.CharField(db_column='Picture', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    commit = False
 
     class Meta:
         managed = False
@@ -105,7 +107,7 @@ class Customers(AbstractBaseUser, ExtraManager):
     city = models.CharField(db_column='city', max_length=45, blank=True, null=True)  # Field name made lowercase.
     state = models.CharField(db_column='State', max_length=45, blank=True, null=True)  # Field name made lowercase.
     zip_code = models.IntegerField(db_column='zipcode', blank=True, null=True)  # Field name made lowercase.
-    promotions = models.BooleanField(default=False, blank=False, null=False)
+    promotions = models.IntegerField(default=False, blank=True, null=True)
     cart_id = models.ForeignKey('ShoppingCart', models.DO_NOTHING, db_column='cart_id', blank=True, null=True)  # Field name made lowercase.
     card_type = models.CharField(db_column='card_type', max_length=45, blank=True, null=True)  # Field name made lowercase.
     card_number = EncryptedCharField(max_length=100)  # Field name made lowercase.
@@ -200,6 +202,7 @@ class Inventory(models.Model):
     datepublished = models.TextField(blank=True, null=True)  # This field type is a guess.
     pic = models.ImageField(upload_to='images/')
 
+
     class Meta:
         managed = False
         db_table = 'inventory'
@@ -207,15 +210,15 @@ class Inventory(models.Model):
 
 class Orders(models.Model):
     orderid = models.AutoField(db_column='OrderID', primary_key=True)  # Field name made lowercase.
-    custid = models.IntegerField(db_column='CustID', blank=True, null=True)
+    custid = models.ForeignKey(Customers, models.DO_NOTHING, db_column='CustID', blank=True, null=True)  # Field name made lowercase.
     ordertime = models.TimeField()
     orderdate = models.DateField(db_column='OrderDate', blank=True, null=True)  # Field name made lowercase.
     orderstatus = models.CharField(db_column='OrderStatus', max_length=45, blank=True, null=True)  # Field name made lowercase.
     totalprice = models.DecimalField(db_column='TotalPrice', max_digits=10, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
     shipaddress = models.CharField(db_column='ShipAddress', max_length=45, blank=True, null=True)  # Field name made lowercase.
     paymentmethod = models.CharField(db_column='PaymentMethod', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    books = models.CharField(db_column='Books', max_length=200, blank=True, null=True)  # Field name made lowercase.
-    promotion = models.CharField(db_column='Promotion', max_length=45, blank=True, null=True)
+    books = models.CharField(db_column='Books', max_length=45, blank=True, null=True)  # Field name made lowercase.
+
     class Meta:
         managed = False
         db_table = 'orders'
@@ -253,3 +256,4 @@ class ShoppingCart(models.Model):
     class Meta:
         managed = False
         db_table = 'shopping cart'
+

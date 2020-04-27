@@ -30,9 +30,10 @@ urlpatterns = [
     path('inventory', InventoryView),
     path('inventory/add', InventoryaddView),
     path('delete/<slug:bid>/', delete, name='delete'),
+    path('edit_book/<slug:bid>/', edit_book, name='edit_book'),
 
-    path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/loggedout.html'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name='storefront/html/login.html')),
+    path('logout/', auth_views.LogoutView.as_view(template_name='storefront/html/loggedout.html')),
     path('loggedout/', loggedout),
     path('login/forgot', forgot_view),
 
@@ -58,17 +59,19 @@ urlpatterns = [
     path('profile/edit', edit_profile, name='edit_profile'),
     path('profile/changepassword', changepassword, name='changepassword'),
 
+
+    path('toomanybooks/', toomanybooks, name = 'toomanybooks'),
+
     path('addtocart/<slug:bid>/', addtocart, name='addtocart'),
     path('removefromcart/<slug:bid>/', removefromcart, name='removefromcart'),
     path('checkout/', checkout, name='checkout'),
     path('mycart/', cartview, name='mycart'),
     path('checkout/order_confirm/', order_confirm, name='order_confirm'),
-    path('checkout/promo', addpromo, name='addpromo'),
 
     path('login/forgot', forgot_view),
 
     path('home/', home_view),
-    path('', home_view, name='home'),
+    path('', home_view),
 
     path('admin/', admin.site.urls),
     # path('loggedin/', loggedin_view),
