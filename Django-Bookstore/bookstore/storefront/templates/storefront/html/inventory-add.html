@@ -1,41 +1,14 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="{% static 'storefront/css/TermProject.css' %}">
-<!--    <link rel="stylesheet" href="css/TermProject.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <title>Add A Book</title>
-    <script></script>
-
-<body style="background-color: #F5FFFA">
-    <nav class="nav navbar-inverse" style="background-color: #2F4F4F">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="" class="navbar-brand">Flip The Page</a>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="../search"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="../mycart"> MY CART</a></li>
-                {% if x %}
-                    <li><a href="../logout">LOGOUT</a></li>
-                    <li><a href="../profile">View Profile</a></li>
-                {% else %}
-                    <li><a href="../login">LOGIN</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-
-<br>
-    <form method = "post" enctype="multipart/form-data" id ="inventoryAddBook">
+    <meta charset="UTF-8">
+    <title>Add a Book</title>
+</head>
+<body>
+    <form method = "post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p}}
-        <button type="submit" class="btn btn-default" style="border: 2px solid #2F4F4F">Add Book</button>
+        {{ form.as_p }}
+        <button type="submit">Add Book</button>
     </form>
 </body>
 </html>

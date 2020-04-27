@@ -16,24 +16,28 @@
         });
     </script>
 </head>
-<body style="background-color: #F5FFFA">
-    <nav class="nav navbar-inverse" style="background-color: #2F4F4F">
+<body>
+    <nav class="nav navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="{% url 'home' %}" class="navbar-brand">Flip The Page</a>
+                <a href="" class="navbar-brand">BOOKSTORE TITLE</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'search' %}"><span class="glyphicon glyphicon-search"></span> SEARCH</a></li>
-                <li><a href="{% url 'mycart' %}"> MY CART</a></li>
+                <li><a href="../mycart"> MY CART</a></li>
                 {% if x %}
-                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
-                    <li><a href="{% url 'view_profile' %}">VIEW PROFILE</a></li>
+                    <li><a href="../logout">LOGOUT</a></li>
+                    <li><a href="../profile">View Profile</a></li>
                 {% else %}
-                    <li><a href="{% url 'login' %}">LOGIN</a></li>
+                    <li><a href="../login">LOGIN</a></li>
+                {% endif %}
+
+                {%if user.is_staff%}
+                    <li><a href="../admin">Admin</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
+
     <form method="get" action="{% url 'search' %}" class="form-inline">
         {% csrf_token %}
         <div>
@@ -51,31 +55,23 @@
             <input name="search" placeholder="Search..." value="{{ request.GET.search }}" class="form-control">
         </div>
         <div class="form-group">
-            <button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">GO</button>
+            <button type="submit" class="btn btn-default">GO</button>
         </div>
     </form>
 
     {% if books %}
-        <table class="table table-hover">
-            <thead>
-                <th></th>
-                <th>Title</th>
-                <th>Price</th>
-                <th></th>
-            </thead>
-            <tbody>
+        <table>
             {% for book in books %}
                 <tr class="clickable-row" data-href="{% url 'book' bid=book.bookid %}">
                     <td><img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:150px;"></td>
                     <td>{{ book.title }}</td>
-                    <td>${{ book.sell_price }}</td>
-                    <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Add to Cart</button></a></td>
+                    <td><a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add to Cart</button></a></td>
                 </tr>
+
             {% endfor %}
-            </tbody>
         </table>
     {% else %}
-        <p style="text-align: center;">Book Not Found</p>
+        <p>Book Not Found</p>
     {% endif %}
 
 <!--    <div class="container">-->
