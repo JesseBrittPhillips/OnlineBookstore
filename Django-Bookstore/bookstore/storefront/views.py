@@ -14,7 +14,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from decimal import *
-import datetime
 
 User = get_user_model()
 
@@ -22,8 +21,8 @@ User = get_user_model()
 ########Home Page Views####################
 #########################################
 def home_view(request):
-    books = Inventory.objects.all()
     x = 0
+    books = Inventory.objects.all()
     if request.user.is_authenticated:
         x = 1
         if request.user.is_staff:
@@ -47,6 +46,22 @@ def delete(request, bid):
     book = Inventory.objects.get(pk=bid)
     book.delete()
     return redirect('/inventory')
+
+def edit_book(request, bid):
+    if not request.user.is_staff:
+        raise Http404
+
+    book = Inventory.objects.get(pk=bid)
+    if request.method == 'POST':
+        form = BookEdit(request.POST, request.FILES, instance=book)
+
+        if form.is_valid():
+            bookform = form.save(commit=False)
+            bookform.save()
+            return redirect('/inventory')
+    else:
+        form = BookEdit(instance=book)
+    return render(request, 'storefront/html/edit-book.html', {'form': form})
 
 def InventoryView(request):
     if not request.user.is_staff:
@@ -95,7 +110,7 @@ def activate(request, uidb64, token):
 
 def register(request):
     x = ""
-    form = CustomerRegForm(request.POST or None)
+    form = CustomerRegForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
             user = form.save(commit=False)
@@ -142,6 +157,31 @@ def loggedout(request):
     return render(request, "storefront/html/loggedout.html", context)
 
 
+def customer_login_view(request):
+    x = 0
+    y = ""
+    form = CustomerLoginForm(request.POST or None)
+    if form.is_valid():
+        user = form.save(commit=False)
+        for cust in Customers.objects.raw('SELECT * FROM bookstore.customers'):
+            if(cust.email == user.email):
+                if(cust.password == user.password):
+                    y=""
+                    x=1
+                else:
+                    y="please enter the correct email/password"
+            else:
+                y = "please enter the correct email/password"
+    context = {
+        'form': form,
+        'x':x,
+        'y':y,
+    }
+    if(x):
+        return redirect('/loggedin')
+    else:
+        return render(request, "storefront/html/login.html", context)
+
 ########################################
 ########Password Views####################
 #########################################
@@ -184,23 +224,19 @@ def forgot_view(request):
         return render(request, "storefront/html/forgot.html", context)
 
 
+# def loggedin_view(request):
+#     context = {}
+#     return render(request, "storefront/html/loggedin.html", context)
 ########################################
 ########Profile Views####################
 #########################################
 def view_profile(request):
-    x = 0
-    if request.user.is_authenticated:
-        x = 1
     context = {
-        'x' : x,
-        'user': request.user,
+        'user': request.user
     }
-    return render(request, "storefront/html/view_profile.html", context)
+    return render(request, "storefront/html/view_profile.html")
 
 def edit_profile(request):
-    x = 0
-    if request.user.is_authenticated:
-        x = 1
     if request.method == 'POST':
         form = CustomerEdit(request.POST, instance=request.user)
         if form.is_valid():
@@ -223,8 +259,7 @@ def edit_profile(request):
     else:
         form = CustomerEdit(instance=request.user)
     context = {
-        'x': x,
-        'form': form,
+        'form': form
     }
     return render(request, "storefront/html/profile.html", context)
 
@@ -232,9 +267,6 @@ def edit_profile(request):
 ########Shopping Views####################
 #########################################
 def search(request):
-    x = 0
-    if request.user.is_authenticated:
-        x = 1
     search_term = request.GET.get('search')
     if search_term:
         books = Inventory.objects.filter(title__icontains=search_term)
@@ -242,14 +274,11 @@ def search(request):
         books = Inventory.objects.all()
 
     context = {
-        'x' : x,
         'books' : books
     }
     return render(request, "storefront/html/search.html", context)
 
 def addtocart(request, bid):
-    if not request.user.is_authenticated:
-        return redirect('login')
     cartuser = request.user
     inv = Inventory.objects.get(pk=bid)
 
@@ -290,8 +319,6 @@ def cartview(request):
     for cart in cartlist:
         for book in booklist:
             if cart.invid == book.bookid:
-                if cart.quantity==book.number_of_copies:
-                    y=1
                 if cart.quantity>book.number_of_copies:
                     cart.quantity = book.number_of_copies
                     if cart.quantity == 0:
@@ -310,76 +337,7 @@ def cartview(request):
     }
     return render(request, "storefront/html/mycart.html", context)
 
-def addpromo(request):
-    try:
-        order = Orders.objects.get(custid = request.user.id)
-        order.ordertime = datetime.datetime.now()
-
-    except:
-        order = Orders.objects.create(custid = request.user.id, ordertime = datetime.datetime.now())
-
-    form = orderForm(request.POST)
-    if request.method == 'POST':
-        if form.is_valid():
-            orderform = form.save(commit=False)
-            for promo in Promotions.objects.all():
-                if promo.promocode == orderform.promotion:
-                    order.promotion = orderform.promotion
-                    order.save()
-            return redirect('checkout')
-
-    context = {
-        'form' :form
-    }
-    return render(request, "storefront/html/addpromo.html", context)
-
-
 def checkout(request):
-    x = 0
-    if request.user.is_authenticated:
-        x = 1
-
-    books = ""
-    cartlist = ShoppingCart.objects.filter(custid=request.user.id)
-    booklist = Inventory.objects.all()
-    for cart in cartlist:
-        for book in booklist:
-            if cart.invid == book.bookid:
-                books += book.title + "(x" + str(cart.quantity) + "), "
-
-    #########################Getting the correct order object#################
-    try:
-        order = Orders.objects.get(custid = request.user.id)
-        order.ordertime = datetime.datetime.now()
-
-    except:
-        order = Orders.objects.create(custid = request.user.id, ordertime = datetime.datetime.now())
-
-    #################################getting the correct cart total##########################
-    total = Decimal(0.00)
-    cartlist = ShoppingCart.objects.filter(custid=request.user.id)
-    booklist = Inventory.objects.all()
-    for cart in cartlist:
-        for book in booklist:
-            if cart.invid == book.bookid:
-                total = (cart.quantity * book.sell_price) + total
-
-    ########################getting the promotion from the order
-    promotion = Decimal(100)######set to 100 for the case it doesnt exist
-    if order.promotion:
-        for promo in Promotions.objects.all():
-            if promo.promocode == order.promotion:
-                promotion = Decimal(promo.percentage)
-
-
-    total = total*(promotion/100)
-
-    order.orderdate = datetime.date.today()
-    order.orderstatus = "in progress"
-    order.totalprice = total
-    total = order.totalprice
-    order.save()
-
     form = Checkout(request.POST, instance=request.user)
     if request.method == 'POST':
         if form.is_valid():
@@ -388,11 +346,7 @@ def checkout(request):
             current_site = get_current_site(request)
             mail_subject = 'Bookstore Order'
             message = render_to_string('order_email.html', {
-                'cartlist': cartlist,
-                'booklist': booklist,
                 'user': user,
-                'books': books,
-                'order': order,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
@@ -406,8 +360,6 @@ def checkout(request):
     else:
         form = Checkout(instance=request.user)
     context = {
-        'total' : total,
-        'x' : x,
         'form': form,
         'user': request.user
     }
@@ -457,12 +409,8 @@ def order_confirm(request):
 #########################################
 
 def book(request, bid):
-    x = 0
-    if request.user.is_authenticated:
-        x = 1
     book = Inventory.objects.get(pk=bid)
     context = {
-        'x' : book,
         'book': book
     }
     return render(request, 'storefront/html/book.html', context)
