@@ -327,10 +327,13 @@ def checkout(request):
     if request.user.is_authenticated:
         x = 1
 
-    cartuser = request.user
-    cartlist = ShoppingCart.objects.filter(custid=cartuser.id)
+    books = ""
+    cartlist = ShoppingCart.objects.filter(custid=request.user.id)
+    booklist = Inventory.objects.all()
     for cart in cartlist:
-        booklist = Inventory.objects.filter(bookid=cart.invid)
+        for book in booklist:
+            if cart.invid == book.bookid:
+                books += book.title + "(x" + str(cart.quantity) + "), "
 
     #########################Getting the correct order object#################
     try:
@@ -342,7 +345,7 @@ def checkout(request):
 
     #################################getting the correct cart total##########################
     total = Decimal(0.00)
-    cartlist = ShoppingCart.objects.filter(custid=cartuser.id)
+    cartlist = ShoppingCart.objects.filter(custid=request.user.id)
     booklist = Inventory.objects.all()
     for cart in cartlist:
         for book in booklist:
@@ -376,6 +379,8 @@ def checkout(request):
                 'cartlist': cartlist,
                 'booklist': booklist,
                 'user': user,
+                'books': books,
+                'order': order,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
@@ -423,6 +428,8 @@ def order_confirm(request):
     order.paymentmethod = request.user.card_type
     order.orderstatus = "order confirmed"
     order.save()
+    cartlist = ShoppingCart.objects.get(custid=request.user.id)
+    cartlist.delete()
     context = {
         'order' : order,
     }
