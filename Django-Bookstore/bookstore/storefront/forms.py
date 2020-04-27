@@ -30,13 +30,13 @@ class InventoryForm(forms.ModelForm):
             'authors',
             'buyprice',
             'sell_price',
-            'minumum',
+            'minimum',
             'category',
             'number_of_copies',
             'publisher',
             'editor',
             'isbn',
-            'datepublished',
+            'date_published',
             'pic'
         )
 
@@ -168,5 +168,39 @@ class Checkout(UserChangeForm):
             'first_name',
             'last_name',
             'phone'
+        )
+
+class BookEdit(forms.ModelForm):
+    bookid = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=45, blank=True, null=True)
+    authors = models.CharField(max_length=45, blank=True, null=True)
+    buyprice = models.DecimalField(db_column='BuyPrice', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sell_price = models.DecimalField(db_column='Sell Price', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    minimum = models.IntegerField(blank=True, null=True)
+    category = models.CharField(max_length=45, blank=True, null=True)
+    number_of_copies = models.IntegerField(db_column='number of copies', blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    publisher = models.CharField(max_length=45, blank=True, null=True)
+    editor = models.CharField(max_length=45, blank=True, null=True)
+    isbn = models.CharField(db_column='ISBN', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    date_published = models.CharField(blank=True, max_length=4, null=True)  # This field type is a guess.
+    pic = models.ImageField(upload_to='images/', blank=True)
+
+
+    class Meta:
+        model = Inventory
+        fields = (
+            'bookid',
+            'title',
+            'authors',
+            'buyprice',
+            'sell_price',
+            'minimum',
+            'category',
+            'number_of_copies',
+            'publisher',
+            'editor',
+            'isbn',
+            'date_published',
+            'pic'
         )
 

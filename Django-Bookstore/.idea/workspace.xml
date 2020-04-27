@@ -51,10 +51,13 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="319" y="232" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1587770097833" />
-
     <state x="-1151" y="513" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587740634128">
       <screen x="-1920" y="76" width="1920" height="1040" />
     </state>
     <state x="-1151" y="513" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/-1920.76.1920.1040@-1920.76.1920.1040" timestamp="1587740634128" />
+    <state x="591" y="65" width="737" height="909" key="find.popup" timestamp="1587964151479">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="591" y="65" width="737" height="909" key="find.popup/0.0.1920.1040/-1920.76.1920.1040@0.0.1920.1040" timestamp="1587964151479" />
   </component>
 </project>

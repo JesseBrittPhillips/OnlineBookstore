@@ -191,13 +191,13 @@ class Inventory(models.Model):
     authors = models.CharField(max_length=45, blank=True, null=True)
     buyprice = models.DecimalField(db_column='BuyPrice', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
     sell_price = models.DecimalField(db_column='Sell Price', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    minumum = models.IntegerField(blank=True, null=True)
+    minimum = models.IntegerField(db_column='minumum', blank=True, null=True)
     category = models.CharField(max_length=45, blank=True, null=True)
     number_of_copies = models.IntegerField(db_column='number of copies', blank=True, null=True)  # Field renamed to remove unsuitable characters.
     publisher = models.CharField(max_length=45, blank=True, null=True)
     editor = models.CharField(max_length=45, blank=True, null=True)
     isbn = models.CharField(db_column='ISBN', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    datepublished = models.TextField(blank=True, null=True)  # This field type is a guess.
+    date_published = models.CharField(db_column='datepublished', blank=True, max_length=4, null=True)  # This field type is a guess.
     pic = models.ImageField(upload_to='images/')
 
     class Meta:

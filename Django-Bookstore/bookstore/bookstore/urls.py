@@ -76,6 +76,7 @@ urlpatterns = [
 
     path('book/<slug:bid>/', book, name='book'),
     path('search/', search, name='search'),
+    path('edit_book/<slug:bid>/', edit_book, name='edit_book'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

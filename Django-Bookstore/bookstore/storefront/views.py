@@ -70,6 +70,22 @@ def InventoryaddView(request):
         form = InventoryForm()
     return render(request, 'storefront/html/inventory-add.html', {'form': form})
 
+def edit_book(request, bid):
+    if not request.user.is_staff:
+        raise Http404
+
+    book = Inventory.objects.get(pk=bid)
+    if request.method == 'POST':
+        form = BookEdit(request.POST, request.FILES, instance=book)
+
+        if form.is_valid():
+            bookform = form.save(commit=False)
+            bookform.save()
+            return redirect('/inventory')
+    else:
+        form = BookEdit(instance=book)
+    return render(request, 'storefront/html/edit-book.html', {'form': form})
+
 
 
 ########################################

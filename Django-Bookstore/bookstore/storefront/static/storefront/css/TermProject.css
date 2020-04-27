@@ -10,6 +10,11 @@ form p {
   font-size: xx-large;
 }
 
+#inventoryEditBook p{
+  font-size: medium;
+  font-color: #2F4F4F;
+}
+
 #inventoryAddBook p{
   font-size: medium;
   font-color: #2F4F4F;

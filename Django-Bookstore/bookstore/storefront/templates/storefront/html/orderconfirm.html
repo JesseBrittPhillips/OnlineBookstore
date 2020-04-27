@@ -35,20 +35,23 @@
                 <p style="font-size: xx-large; text-align: center;">ORDER CONFIRMATION</p>
             </div>
             <div class="summary">
-                <table>
+                <table class="table">
+                    <thead class="thead-dark">
                     <tr>
-                        <th>Order ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Order Date</th>
-                        <th>Order Time</th>
-                        <th>Order Status</th>
-                        <th>Order Total</th>
-                        <th>Ordered Items</th>
-                        <th>Shipping Info</th>
-                        <th>Card Type</th>
-                        <th>Promotions Used</th>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Order Time</th>
+                        <th scope="col">Order Status</th>
+                        <th scope="col">Order Total</th>
+                        <th scope="col">Ordered Items</th>
+                        <th scope="col">Shipping Info</th>
+                        <th scope="col">Card Type</th>
+                        <th scope="col">Promotions Used</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td>{{order.orderid}}</td>
                         <td>{{request.user.first_name}}</td>
@@ -62,6 +65,7 @@
                         <td>{{order.paymentmethod}}</td>
                         <td>{{order.promotion}}</td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
