@@ -52,7 +52,7 @@
             {% for book in booklist %}
                 <tr>
                     <td>{{ book.title }}</td>
-                    <td><img src="{{book.pic.url}}" alt="Coffee" style="width:100px;"></td>
+                    <td><img src="{{book.pic.url}}" alt="Coffee" style="width:150px;"></td>
                     <td><a href="{% url 'delete' bid=book.bookid %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Delete</button></a></td>
                 </tr>
             {% endfor %}

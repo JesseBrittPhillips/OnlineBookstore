@@ -29,18 +29,23 @@
         </div>
     </nav>
 
-    <div id="book" class="container">
-        <div>
-            <p>{{ book.title }}</p>
-            <p>{{ book.authors }}</p>
-            <p>{{ book.publisher }}</p>
-            <p>{{ book.editor }}</p>
-            <p>${{ book.sell_price }}</p>
-        </div>
-        <div>
-            <img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:40%;">
-        </div>
-        <a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default">Add to Cart</button></a>
+    <br>
+    <br>
+<div id="info" class="container">
+               <div class="col-sm-8">
+                    <div class="card" style="width:40rem">
+                        <div class="card-body" alt="Card image cap">
+                            <img src="{{book.pic.url}}" alt="{{ book.title }}" style="width:100%;">
+                        </div>
+                    </div>
+                </div>
+
+            <h1>{{ book.title }}</h1>
+            <h2>{{ book.authors }}</h2>
+            <h2>{{ book.publisher }}</h2>
+            <h2{{ book.editor }}</p>
+            <h2>${{ book.sell_price }}</h2>
+        <a href="{% url 'addtocart' bid=book.bookid %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Add to Cart</button></a>
     </div>
 
 </body>

@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,9 +54,9 @@
         </table>
     </div>
 
-    <div>
-        Total is {{total}}
-        <a href="{% url 'checkout' %}"><button type="button" class="btn btn-default">Checkout</button></a>
+    <div align="middle">
+        <h3>Total is ${{total}}</h3>
+        <a href="{% url 'checkout' %}"><button type="button" class="btn btn-default" style="border: 2px solid #2F4F4F">Checkout</button></a>
     </div>
 
 </body>
